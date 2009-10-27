@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace HexGame
 {
     abstract class MapItem
     {
-        public int X;
-        public int Y;
+        public Vector2 hexQuoordinates;
 
-        public MapItem(int x, int y) 
+        public MapItem(Vector2 hexQuoords) 
         {
-            X = x;
-            Y = y;
+            hexQuoordinates = hexQuoords;
         }
     }
 }

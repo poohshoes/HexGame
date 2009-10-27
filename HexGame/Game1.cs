@@ -19,8 +19,9 @@ namespace HexGame
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
-        DrawingMaster _drawingMaster;
+        ViewMaster _drawingMaster;
         World _world;
+        MouseInputHandler _mouseInputHandler;
 
         public Game1()
         {
@@ -36,8 +37,17 @@ namespace HexGame
         /// </summary>
         protected override void Initialize()
         {
+            this.IsMouseVisible = true;
+            _mouseInputHandler = new MouseInputHandler(this);
+
             _world = new World();
-            _drawingMaster = new DrawingMaster(this, _world);
+            _world.AddMapItem(new Building(new Vector2(4, 4), BuildingTypes.Farm));
+            _world.AddMapItem(new Building(new Vector2(5, 3), BuildingTypes.Farm));
+            _world.AddMapItem(new Building(new Vector2(6, 5), BuildingTypes.Farm));
+            _world.AddMapItem(new Building(new Vector2(4, 5), BuildingTypes.Farm));
+            _world.AddMapItem(new Building(new Vector2(5, 5), BuildingTypes.Farm));
+
+            _drawingMaster = new ViewMaster(this, _world, _mouseInputHandler);
 
             base.Initialize();
         }
