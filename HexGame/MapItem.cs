@@ -8,11 +8,16 @@ namespace HexGame
 {
     abstract class MapItem
     {
-        public Vector2 hexQuoordinates;
+        public IntVector2 hexQuoordinates;
 
-        public MapItem(Vector2 hexQuoords) 
+        public MapItem(IntVector2 hexQuoords) 
         {
             hexQuoordinates = hexQuoords;
+        }
+
+        virtual public void Update(double totalGameSeconds) 
+        {
+        
         }
     }
 }

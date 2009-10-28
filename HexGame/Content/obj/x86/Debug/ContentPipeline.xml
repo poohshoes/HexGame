@@ -37,6 +37,15 @@
       <Output>C:\Documents and Settings\ian\github\HexGame\HexGame\bin\x86\Debug\Content\hexHighlight.xnb</Output>
       <Time>2009-10-27T01:27:39.8125-07:00</Time>
     </Item>
+    <Item>
+      <Source>resourceFood.png</Source>
+      <Name>resourceFood</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\ian\github\HexGame\HexGame\bin\x86\Debug\Content\resourceFood.xnb</Output>
+      <Time>2009-10-28T05:48:32.28125-07:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

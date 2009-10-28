@@ -85,6 +85,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Building.cs" />
+    <Compile Include="Farm.cs" />
+    <Compile Include="Hex.cs" />
+    <Compile Include="IntVector2.cs" />
     <Compile Include="ViewMaster.cs" />
     <Compile Include="MapItem.cs" />
     <Compile Include="MouseInputHandler.cs" />

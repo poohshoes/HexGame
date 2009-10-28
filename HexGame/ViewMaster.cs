@@ -15,19 +15,17 @@ namespace HexGame
     {
         World _world;
 
+        Texture2D _foodTexture;
         Texture2D _hexHighlightTexture;
         Texture2D _farmTexture;
 
         Texture2D _hexTexture;
-        readonly Vector2 _hexTextureDims;
-
-        //const int _hexWidthPixels = 80;
-        //const int _hexHeightPixels = 50;
+        readonly IntVector2 _hexTextureDims;
 
         const int _hexXOverlapPixels = 20;
 
-        readonly Vector2 _worldScreenOffset = new Vector2(10, 10);
-        readonly Vector2 _buildingOffsetFromHex = new Vector2(20, 5);
+        readonly IntVector2 _worldScreenOffset = new IntVector2(10, 10);
+        readonly IntVector2 _buildingOffsetFromHex = new IntVector2(20, 5);
 
         SpriteBatch _spriteBatch;
 
@@ -37,6 +35,7 @@ namespace HexGame
 
             _spriteBatch = new SpriteBatch(game.GraphicsDevice);
 
+            _foodTexture = game.Content.Load<Texture2D>("resourceFood");
             _hexHighlightTexture = game.Content.Load<Texture2D>("hexHighlight");
             _farmTexture = game.Content.Load<Texture2D>("farm");
 
@@ -53,38 +52,55 @@ namespace HexGame
 
             _drawMapTiles();
             _drawHexSelection();
+            _drawResources();
             _drawBuildings();
 
             _spriteBatch.End();
         }
 
-        public void LeftMouseClickBehaviour(Vector2 mousePosition) 
+        public void LeftMouseClickBehaviour(IntVector2 mousePosition) 
         {
-            Vector2 mouseRelativeToWorld = mousePosition - _worldScreenOffset;
+            IntVector2 selectedHex;
+            if (_getHexFromScreenPosition(mousePosition, out selectedHex))
+              _world.SelectedHex = selectedHex;
+        }
+
+        /// <summary>
+        /// Gets the Hex that us under the screen position supplied.
+        /// </summary>
+        /// <param name="positionOnScreen"></param>
+        /// <param name="hex"></param>
+        /// <returns>True if hex was found, false otherwise.</returns>
+        bool _getHexFromScreenPosition(IntVector2 positionOnScreen, out IntVector2 hex)
+        {
+            // alows us to return early if no hex can be found.
+            hex = IntVector2.Zero;
+
+            IntVector2 mouseRelativeToWorld = positionOnScreen - _worldScreenOffset;
 
             // find the most likely hex at that mouse X (could still be one to the left or right)
-            Vector2 suspectHex = new Vector2(0, 0);
-            suspectHex.X = (float)Math.Floor(mouseRelativeToWorld.X / (_hexTextureDims.X - _hexXOverlapPixels));
+            IntVector2 suspectHex = new IntVector2(0, 0);
+            suspectHex.X = mouseRelativeToWorld.X / (_hexTextureDims.X - _hexXOverlapPixels);
 
-            suspectHex.Y = _hexIsSunken(Convert.ToInt32(suspectHex.X)) ?
-                (float)Math.Floor((mouseRelativeToWorld.Y - (_hexTextureDims.Y/2)) / _hexTextureDims.Y) : 
-                (float)Math.Floor(mouseRelativeToWorld.Y / _hexTextureDims.Y);
+            suspectHex.Y = _hexIsSunken(suspectHex.X) ?
+                (mouseRelativeToWorld.Y - (_hexTextureDims.Y/2)) / _hexTextureDims.Y : 
+                mouseRelativeToWorld.Y / _hexTextureDims.Y;
 
             // object clicked on was not a hex
             if(!_world.IsValidHexQuoord(suspectHex))
-                return;
+                return false;
 
             // get all the the hexes it could potentially be (thse form a bone shape around the suspect hex)
-            List<Vector2> potentialHexes = _getBoneShapeHexLocations(suspectHex);
+            List<IntVector2> potentialHexes = _getBoneShapeHexLocations(suspectHex);
 
             // the middleHex has already been evaluated so we should have at least one potential hex
             Debug.Assert(potentialHexes.Count != 0);
 
             // now we just need to find the hex that is closest to the mouse and that is the one that was clicked on
-            Vector2 closestToMouseHex = suspectHex;
+            IntVector2 closestToMouseHex = suspectHex;
             float distanceToMouse = 999999;
 
-            foreach (Vector2 v in potentialHexes) 
+            foreach (IntVector2 v in potentialHexes) 
             {
                 float testDistance = (_getHexCenter(v) - mouseRelativeToWorld).Length();
                 if(testDistance < distanceToMouse)
@@ -94,12 +110,13 @@ namespace HexGame
                 }
             }
 
-            _world.SelectedHex = closestToMouseHex;
+            hex = closestToMouseHex;
+            return true;
         }
 
-        Vector2 _getHexCenter(Vector2 hexQuoords) 
+        IntVector2 _getHexCenter(IntVector2 hexQuoords) 
         {
-            Vector2 center = _hexTextureDims / 2;
+            IntVector2 center = _hexTextureDims / 2;
             center.Y += hexQuoords.Y * _hexTextureDims.Y;
             center.X += hexQuoords.X * (_hexTextureDims.X - _hexXOverlapPixels);
 
@@ -119,28 +136,28 @@ namespace HexGame
         /// </summary>
         /// <param name="middleHex">The hex that will be the middle bone.</param>
         /// <returns>A list of the VALID hex quoordinates in the bone.</returns>
-        List<Vector2> _getBoneShapeHexLocations(Vector2 middleHex) 
+        List<IntVector2> _getBoneShapeHexLocations(IntVector2 middleHex) 
         {
-            List<Vector2> unvalidatedBoneHexes = new List<Vector2>();
+            List<IntVector2> unvalidatedBoneHexes = new List<IntVector2>();
 
             unvalidatedBoneHexes.Add(middleHex);
-            unvalidatedBoneHexes.Add(new Vector2(middleHex.X - 1, middleHex.Y));
-            unvalidatedBoneHexes.Add(new Vector2(middleHex.X + 1, middleHex.Y));
+            unvalidatedBoneHexes.Add(new IntVector2(middleHex.X - 1, middleHex.Y));
+            unvalidatedBoneHexes.Add(new IntVector2(middleHex.X + 1, middleHex.Y));
 
             if (_hexIsSunken(middleHex.X)) 
             {
-                unvalidatedBoneHexes.Add(new Vector2(middleHex.X - 1, middleHex.Y+1));
-                unvalidatedBoneHexes.Add(new Vector2(middleHex.X + 1, middleHex.Y+1));
+                unvalidatedBoneHexes.Add(new IntVector2(middleHex.X - 1, middleHex.Y+1));
+                unvalidatedBoneHexes.Add(new IntVector2(middleHex.X + 1, middleHex.Y+1));
             }
             else
             {
-                unvalidatedBoneHexes.Add(new Vector2(middleHex.X - 1, middleHex.Y-1));
-                unvalidatedBoneHexes.Add(new Vector2(middleHex.X + 1, middleHex.Y-1));
+                unvalidatedBoneHexes.Add(new IntVector2(middleHex.X - 1, middleHex.Y-1));
+                unvalidatedBoneHexes.Add(new IntVector2(middleHex.X + 1, middleHex.Y-1));
             }
 
-            List<Vector2> validatedBoneHexes = new List<Vector2>();
+            List<IntVector2> validatedBoneHexes = new List<IntVector2>();
 
-            foreach (Vector2 v in unvalidatedBoneHexes) 
+            foreach (IntVector2 v in unvalidatedBoneHexes) 
             {
                 if (_world.IsValidHexQuoord(v))
                     validatedBoneHexes.Add(v);
@@ -149,13 +166,36 @@ namespace HexGame
             return validatedBoneHexes;
         }
 
+        void _drawResources() 
+        {
+            List<Hex> hexesWithResources = _world.getHexesWithResources();
+            foreach (Hex h in hexesWithResources) 
+            {
+                for (int i = 0; i < h.Resources.Count; i++) 
+                {
+                    Vector2 drawLocation = new Vector2(
+                        (_foodTexture.Width / 2) + i * 4,
+                        (_hexTextureDims.Y / 2) - 4 + i * 5
+                        );
+
+                    drawLocation += _getScreenPositionOfHex(h.MapQuoordinate).ToVector2();
+
+                    _spriteBatch.Draw(
+                        _foodTexture,
+                        drawLocation,
+                        Color.White
+                        );
+                }
+            }
+        }
+
         void _drawHexSelection() 
         {
             if (_world.HexIsSelected) 
             {
                 _spriteBatch.Draw(
                         _hexHighlightTexture,
-                        _getScreenPositionOfHex(_world.SelectedHex),
+                        _getScreenPositionOfHex(_world.SelectedHex).ToVector2(),
                         Color.White
                         );
             }
@@ -167,7 +207,7 @@ namespace HexGame
             {
                 _spriteBatch.Draw(
                         _farmTexture,
-                        _getScreenPositionOfBuilding(b.hexQuoordinates),
+                        _getScreenPositionOfBuilding(b.hexQuoordinates).ToVector2(),
                         Color.White
                         );
             }
@@ -181,21 +221,21 @@ namespace HexGame
                 {
                     _spriteBatch.Draw(
                         _hexTexture,
-                        _getScreenPositionOfHex(new Vector2(x, y)),
+                        _getScreenPositionOfHex(new IntVector2(x, y)).ToVector2(),
                         Color.White
                         );
                 }
             }
         }
 
-        Vector2 _getScreenPositionOfBuilding(Vector2 buildingQuoords) 
+        IntVector2 _getScreenPositionOfBuilding(IntVector2 buildingQuoords) 
         {
             return _getScreenPositionOfHex(buildingQuoords) + _buildingOffsetFromHex;
         }
 
-        Vector2 _getScreenPositionOfHex(Vector2 hexQuoords) 
+        IntVector2 _getScreenPositionOfHex(IntVector2 hexQuoords) 
         {
-            return new Vector2
+            return new IntVector2
             (
                 hexQuoords.X * (_hexTextureDims.X - _hexXOverlapPixels),
                 hexQuoords.Y * _hexTextureDims.Y + (_hexIsSunken(hexQuoords.X) ? _hexTextureDims.Y / 2 : 0)

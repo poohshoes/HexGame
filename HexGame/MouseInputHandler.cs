@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace HexGame
 {
-    public delegate void MouseLocation(Vector2 mouseLocation);
+    public delegate void MouseLocation(IntVector2 mouseLocation);
 
     class MouseInputHandler : GameComponent
     {
@@ -29,7 +29,7 @@ namespace HexGame
 
             if (mouseState.LeftButton == ButtonState.Released
                 && _PreviousMouseState.LeftButton == ButtonState.Pressed)
-                LeftMouseClick(new Vector2(mouseState.X, mouseState.Y));
+                LeftMouseClick(new IntVector2(mouseState.X, mouseState.Y));
 
             _PreviousMouseState = mouseState;
 

@@ -41,11 +41,11 @@ namespace HexGame
             _mouseInputHandler = new MouseInputHandler(this);
 
             _world = new World();
-            _world.AddMapItem(new Building(new Vector2(4, 4), BuildingTypes.Farm));
-            _world.AddMapItem(new Building(new Vector2(5, 3), BuildingTypes.Farm));
-            _world.AddMapItem(new Building(new Vector2(6, 5), BuildingTypes.Farm));
-            _world.AddMapItem(new Building(new Vector2(4, 5), BuildingTypes.Farm));
-            _world.AddMapItem(new Building(new Vector2(5, 5), BuildingTypes.Farm));
+            _world.AddMapItem(new Farm(new IntVector2(4, 4), _world.getHexAt(new IntVector2(4, 4))));
+            _world.AddMapItem(new Farm(new IntVector2(5, 3), _world.getHexAt(new IntVector2(5, 3))));
+            _world.AddMapItem(new Farm(new IntVector2(6, 5), _world.getHexAt(new IntVector2(6, 5))));
+            _world.AddMapItem(new Farm(new IntVector2(4, 5), _world.getHexAt(new IntVector2(4, 5))));
+            _world.AddMapItem(new Farm(new IntVector2(5, 5), _world.getHexAt(new IntVector2(5, 5))));
 
             _drawingMaster = new ViewMaster(this, _world, _mouseInputHandler);
 
@@ -81,7 +81,7 @@ namespace HexGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            // TODO: Add your update logic here
+            _world.Update(gameTime.TotalGameTime.Seconds);
 
             base.Update(gameTime);
         }
