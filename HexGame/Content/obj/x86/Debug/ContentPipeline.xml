@@ -46,6 +46,15 @@
       <Output>C:\Documents and Settings\ian\github\HexGame\HexGame\bin\x86\Debug\Content\resourceFood.xnb</Output>
       <Time>2009-10-28T05:48:32.28125-07:00</Time>
     </Item>
+    <Item>
+      <Source>barn.png</Source>
+      <Name>barn</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\ian\github\HexGame\HexGame\bin\x86\Debug\Content\barn.xnb</Output>
+      <Time>2009-10-29T11:10:19.421875-07:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

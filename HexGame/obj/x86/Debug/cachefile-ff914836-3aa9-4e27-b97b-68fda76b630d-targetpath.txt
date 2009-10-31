@@ -3,3 +3,4 @@ Content\farm.xnb
 Content\farmTest.xnb
 Content\hexHighlight.xnb
 Content\resourceFood.xnb
+Content\barn.xnb

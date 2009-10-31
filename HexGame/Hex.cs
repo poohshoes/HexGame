@@ -8,7 +8,14 @@ namespace HexGame
     enum Resources{ Food };
     class Hex
     {
-        public List<Resources> Resources { get; private set; }
+        public List<Resources> Resources 
+        {
+            get 
+            {
+                return _resources;
+            }
+        }
+        List<Resources> _resources { get; private set; }
         int _maxResources;
         public IntVector2 MapQuoordinate { get; private set; }
 
@@ -16,12 +23,25 @@ namespace HexGame
         {
             MapQuoordinate = mapQuoordinate;
             _maxResources = 5;
-            Resources = new List<Resources>(5);
+            _resources = new List<Resources>(5);
         }
 
         public int numResources() 
         {
             return Resources.Count;
+        }
+
+        /// <summary>
+        /// As a side affect excess resources may be destroyed.
+        /// </summary>
+        public void setMaxResources(int newMaxResources) 
+        {
+            _maxResources = newMaxResources;
+
+            if (_maxResources < _resources.Count) 
+            {
+                _resources.RemoveRange(_maxResources, _resources.Count);
+            }
         }
 
         /// <summary>
@@ -31,10 +51,10 @@ namespace HexGame
         /// <returns>False if there is no room to add the resource.</returns>
         public bool AddResource(Resources toAdd) 
         {
-            if (Resources.Count >= _maxResources)
+            if (_resources.Count >= _maxResources)
                 return false;
 
-            Resources.Add(toAdd);
+            _resources.Add(toAdd);
             return true;
         }
 
@@ -45,7 +65,7 @@ namespace HexGame
         /// <returns>False if the resource can not be removed or does not exist in the list.</returns>
         public bool RemoveResource(Resources toRemove)
         {
-            return Resources.Remove(toRemove);
+            return _resources.Remove(toRemove);
         }
     }
 }
