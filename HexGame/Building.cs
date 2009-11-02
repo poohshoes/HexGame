@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace HexGame
 {
-    enum BuildingTypes
+    public enum BuildingTypes
     {
         Farm,
         Warehouse,

@@ -7,14 +7,14 @@ namespace HexGame
 {
     class Farm : Building
     {
-        const int _secondsToGenerateFood = 60;
+        const int _secondsToGenerateFood = 5;
         double _timeInSecondsForNextFoodGeneration;
 
         public Farm(IntVector2 farmLocation, Hex hex)
             : base(farmLocation, BuildingTypes.Farm, hex)
         {
             _timeInSecondsForNextFoodGeneration = _secondsToGenerateFood;
-            _hex.AddResource(Resources.Food);
+            //_hex.AddResource(Resources.Food);
         }
 
         // every so often a farm generates food

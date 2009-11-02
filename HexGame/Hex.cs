@@ -15,15 +15,19 @@ namespace HexGame
                 return _resources;
             }
         }
-        List<Resources> _resources { get; private set; }
+        List<Resources> _resources;
         int _maxResources;
         public IntVector2 MapQuoordinate { get; private set; }
+
+        // THIS SHOULD ALWAYS BE AT LEAST 1 TO SATISFY PATHFINDING
+        public float MoveCost { private set; get; }
 
         public Hex(IntVector2 mapQuoordinate) 
         {
             MapQuoordinate = mapQuoordinate;
             _maxResources = 5;
             _resources = new List<Resources>(5);
+            MoveCost = 1;
         }
 
         public int numResources() 

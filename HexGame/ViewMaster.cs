@@ -18,6 +18,7 @@ namespace HexGame
         Texture2D _foodTexture;
         Texture2D _hexHighlightTexture;
         Texture2D _farmTexture;
+        Texture2D _warehouseTexture;
 
         Texture2D _hexTexture;
         readonly IntVector2 _hexTextureDims;
@@ -38,6 +39,7 @@ namespace HexGame
             _foodTexture = game.Content.Load<Texture2D>("resourceFood");
             _hexHighlightTexture = game.Content.Load<Texture2D>("hexHighlight");
             _farmTexture = game.Content.Load<Texture2D>("farm");
+            _warehouseTexture = game.Content.Load<Texture2D>("warehouse");
 
             _hexTexture = game.Content.Load<Texture2D>("hexGrass");
             _hexTextureDims.X = _hexTexture.Width;
@@ -82,7 +84,7 @@ namespace HexGame
             IntVector2 suspectHex = new IntVector2(0, 0);
             suspectHex.X = mouseRelativeToWorld.X / (_hexTextureDims.X - _hexXOverlapPixels);
 
-            suspectHex.Y = _hexIsSunken(suspectHex.X) ?
+            suspectHex.Y = _world.hexIsSunken(suspectHex.X) ?
                 (mouseRelativeToWorld.Y - (_hexTextureDims.Y/2)) / _hexTextureDims.Y : 
                 mouseRelativeToWorld.Y / _hexTextureDims.Y;
 
@@ -91,7 +93,7 @@ namespace HexGame
                 return false;
 
             // get all the the hexes it could potentially be (thse form a bone shape around the suspect hex)
-            List<IntVector2> potentialHexes = _getBoneShapeHexLocations(suspectHex);
+            List<IntVector2> potentialHexes = _world.getBoneShapeHexLocations(suspectHex);
 
             // the middleHex has already been evaluated so we should have at least one potential hex
             Debug.Assert(potentialHexes.Count != 0);
@@ -120,50 +122,10 @@ namespace HexGame
             center.Y += hexQuoords.Y * _hexTextureDims.Y;
             center.X += hexQuoords.X * (_hexTextureDims.X - _hexXOverlapPixels);
 
-            if (_hexIsSunken(hexQuoords.X))
+            if (_world.hexIsSunken(hexQuoords.X))
                 center.Y += _hexTextureDims.Y / 2;
 
             return center;
-        }
-
-        /// <summary>
-        /// The bone shape is like this:
-        ///  _   _
-        /// / \_/ \
-        /// \_/ \_/
-        /// / \_/ \
-        /// \_/ \_/
-        /// </summary>
-        /// <param name="middleHex">The hex that will be the middle bone.</param>
-        /// <returns>A list of the VALID hex quoordinates in the bone.</returns>
-        List<IntVector2> _getBoneShapeHexLocations(IntVector2 middleHex) 
-        {
-            List<IntVector2> unvalidatedBoneHexes = new List<IntVector2>();
-
-            unvalidatedBoneHexes.Add(middleHex);
-            unvalidatedBoneHexes.Add(new IntVector2(middleHex.X - 1, middleHex.Y));
-            unvalidatedBoneHexes.Add(new IntVector2(middleHex.X + 1, middleHex.Y));
-
-            if (_hexIsSunken(middleHex.X)) 
-            {
-                unvalidatedBoneHexes.Add(new IntVector2(middleHex.X - 1, middleHex.Y+1));
-                unvalidatedBoneHexes.Add(new IntVector2(middleHex.X + 1, middleHex.Y+1));
-            }
-            else
-            {
-                unvalidatedBoneHexes.Add(new IntVector2(middleHex.X - 1, middleHex.Y-1));
-                unvalidatedBoneHexes.Add(new IntVector2(middleHex.X + 1, middleHex.Y-1));
-            }
-
-            List<IntVector2> validatedBoneHexes = new List<IntVector2>();
-
-            foreach (IntVector2 v in unvalidatedBoneHexes) 
-            {
-                if (_world.IsValidHexQuoord(v))
-                    validatedBoneHexes.Add(v);
-            }
-
-            return validatedBoneHexes;
         }
 
         void _drawResources() 
@@ -206,7 +168,7 @@ namespace HexGame
             foreach (Building b in _world.MapItems) 
             {
                 _spriteBatch.Draw(
-                        _farmTexture,
+                        _getBuildingTexture(b.BuildingType),
                         _getScreenPositionOfBuilding(b.hexQuoordinates).ToVector2(),
                         Color.White
                         );
@@ -228,6 +190,18 @@ namespace HexGame
             }
         }
 
+        Texture2D _getBuildingTexture(BuildingTypes building)
+        {
+            switch (building) 
+            {
+                case BuildingTypes.Warehouse:
+                    return _warehouseTexture;
+                case BuildingTypes.Farm:
+                    return _farmTexture;
+            }
+            throw new Exception("Building texture not supplied.");
+        }
+
         IntVector2 _getScreenPositionOfBuilding(IntVector2 buildingQuoords) 
         {
             return _getScreenPositionOfHex(buildingQuoords) + _buildingOffsetFromHex;
@@ -238,23 +212,8 @@ namespace HexGame
             return new IntVector2
             (
                 hexQuoords.X * (_hexTextureDims.X - _hexXOverlapPixels),
-                hexQuoords.Y * _hexTextureDims.Y + (_hexIsSunken(hexQuoords.X) ? _hexTextureDims.Y / 2 : 0)
+                hexQuoords.Y * _hexTextureDims.Y + (_world.hexIsSunken(hexQuoords.X) ? _hexTextureDims.Y / 2 : 0)
             ) + _worldScreenOffset;
-        }
-
-        /// <summary>
-        /// Every some hexes are sunk so that they line up.
-        /// </summary>
-        /// <param name="x">The hexes x quoordinate.</param>
-        /// <returns>True if the hex is sunken.</returns>
-        bool _hexIsSunken(int x) 
-        {
-            return x % 2 == 1;
-        }
-
-        bool _hexIsSunken(float x) 
-        {
-            return _hexIsSunken(Convert.ToInt32(x));
         }
     }
 }

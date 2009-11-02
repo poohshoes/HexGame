@@ -9,3 +9,15 @@ C:\Documents and Settings\ian\github\HexGame\HexGame\bin\x86\Debug\Content\farm.
 C:\Documents and Settings\ian\github\HexGame\HexGame\bin\x86\Debug\Content\farmTest.xnb
 C:\Documents and Settings\ian\github\HexGame\HexGame\bin\x86\Debug\Content\hexHighlight.xnb
 C:\Documents and Settings\ian\github\HexGame\HexGame\bin\x86\Debug\Content\resourceFood.xnb
+C:\Users\Ian\github\HexGame\HexGame\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Ian\github\HexGame\HexGame\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Ian\github\HexGame\HexGame\obj\x86\Debug\HexGame.exe
+C:\Users\Ian\github\HexGame\HexGame\obj\x86\Debug\HexGame.pdb
+C:\Users\Ian\github\HexGame\HexGame\bin\x86\Debug\Content\hexGrass.xnb
+C:\Users\Ian\github\HexGame\HexGame\bin\x86\Debug\Content\farm.xnb
+C:\Users\Ian\github\HexGame\HexGame\bin\x86\Debug\Content\farmTest.xnb
+C:\Users\Ian\github\HexGame\HexGame\bin\x86\Debug\Content\hexHighlight.xnb
+C:\Users\Ian\github\HexGame\HexGame\bin\x86\Debug\Content\resourceFood.xnb
+C:\Users\Ian\github\HexGame\HexGame\bin\x86\Debug\HexGame.exe
+C:\Users\Ian\github\HexGame\HexGame\bin\x86\Debug\HexGame.pdb
+C:\Users\Ian\github\HexGame\HexGame\bin\x86\Debug\Content\warehouse.xnb

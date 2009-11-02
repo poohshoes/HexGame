@@ -46,6 +46,7 @@ namespace HexGame
             _world.AddMapItem(new Farm(new IntVector2(6, 5), _world.getHexAt(new IntVector2(6, 5))));
             _world.AddMapItem(new Farm(new IntVector2(4, 5), _world.getHexAt(new IntVector2(4, 5))));
             _world.AddMapItem(new Farm(new IntVector2(5, 5), _world.getHexAt(new IntVector2(5, 5))));
+            _world.AddMapItem(new Warehouse(new IntVector2(5, 4), _world.getHexAt(new IntVector2(5, 4))));
 
             _drawingMaster = new ViewMaster(this, _world, _mouseInputHandler);
 

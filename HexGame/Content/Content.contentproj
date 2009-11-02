@@ -70,8 +70,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="barn.png">
-      <Name>barn</Name>
+    <Compile Include="warehouse.png">
+      <Name>warehouse</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

@@ -1,1 +1,2 @@
 C:\Documents and Settings\ian\github\HexGame\HexGame\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Ian\github\HexGame\HexGame\Content\obj\x86\Debug\ResolveAssemblyReference.cache
