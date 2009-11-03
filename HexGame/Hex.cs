@@ -5,7 +5,6 @@ using System.Text;
 
 namespace HexGame
 {
-    enum Resources{ Food };
     class Hex
     {
         public List<Resources> Resources 

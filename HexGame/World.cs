@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace HexGame
 {
+    enum Resources { Food };
     class World
     {
         public IntVector2 MapSize { get; private set; }
