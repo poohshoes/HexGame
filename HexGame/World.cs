@@ -45,7 +45,6 @@ namespace HexGame
         {
             MapSize = new IntVector2(10, 10);
             _map = new Hex[MapSize.X, MapSize.Y];
-            //addResource(new IntVector2(0, 0), Resources.Food);
 
             _selectedHex = IntVector2.Zero;
 

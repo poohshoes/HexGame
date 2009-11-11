@@ -21,3 +21,4 @@ C:\Users\Ian\github\HexGame\HexGame\bin\x86\Debug\Content\resourceFood.xnb
 C:\Users\Ian\github\HexGame\HexGame\bin\x86\Debug\HexGame.exe
 C:\Users\Ian\github\HexGame\HexGame\bin\x86\Debug\HexGame.pdb
 C:\Users\Ian\github\HexGame\HexGame\bin\x86\Debug\Content\warehouse.xnb
+C:\Documents and Settings\ian\github\HexGame\HexGame\bin\x86\Debug\Content\warehouse.xnb

@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Ian\github\HexGame\HexGame\bin\x86\Debug\Content\hexGrass.xnb</Output>
-      <Time>2009-10-31T15:55:24.082-06:00</Time>
+      <Output>C:\Documents and Settings\ian\github\HexGame\HexGame\bin\x86\Debug\Content\hexGrass.xnb</Output>
+      <Time>2009-10-26T12:33:07.40625-07:00</Time>
     </Item>
     <Item>
       <Source>farm.png</Source>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Ian\github\HexGame\HexGame\bin\x86\Debug\Content\farm.xnb</Output>
-      <Time>2009-10-31T15:55:24.075-06:00</Time>
+      <Output>C:\Documents and Settings\ian\github\HexGame\HexGame\bin\x86\Debug\Content\farm.xnb</Output>
+      <Time>2009-10-27T00:36:14.21875-07:00</Time>
     </Item>
     <Item>
       <Source>farmTest.png</Source>
@@ -25,8 +25,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Ian\github\HexGame\HexGame\bin\x86\Debug\Content\farmTest.xnb</Output>
-      <Time>2009-10-31T15:55:24.075-06:00</Time>
+      <Output>C:\Documents and Settings\ian\github\HexGame\HexGame\bin\x86\Debug\Content\farmTest.xnb</Output>
+      <Time>2009-10-27T01:00:08-07:00</Time>
     </Item>
     <Item>
       <Source>hexHighlight.png</Source>
@@ -34,8 +34,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Ian\github\HexGame\HexGame\bin\x86\Debug\Content\hexHighlight.xnb</Output>
-      <Time>2009-10-31T15:55:24.082-06:00</Time>
+      <Output>C:\Documents and Settings\ian\github\HexGame\HexGame\bin\x86\Debug\Content\hexHighlight.xnb</Output>
+      <Time>2009-10-27T01:27:39.8125-07:00</Time>
     </Item>
     <Item>
       <Source>resourceFood.png</Source>
@@ -43,8 +43,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Ian\github\HexGame\HexGame\bin\x86\Debug\Content\resourceFood.xnb</Output>
-      <Time>2009-10-31T15:55:24.092-06:00</Time>
+      <Output>C:\Documents and Settings\ian\github\HexGame\HexGame\bin\x86\Debug\Content\resourceFood.xnb</Output>
+      <Time>2009-10-28T05:48:32.28125-07:00</Time>
     </Item>
     <Item>
       <Source>warehouse.png</Source>
@@ -52,43 +52,43 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Ian\github\HexGame\HexGame\bin\x86\Debug\Content\warehouse.xnb</Output>
-      <Time>2009-10-31T15:55:24.074-06:00</Time>
+      <Output>C:\Documents and Settings\ian\github\HexGame\HexGame\bin\x86\Debug\Content\warehouse.xnb</Output>
+      <Time>2009-11-01T21:28:51.25-07:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Ian\github\HexGame\HexGame\Content\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Ian\github\HexGame\HexGame\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Ian\github\HexGame\HexGame\Content\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Ian\github\HexGame\HexGame\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Documents and Settings\ian\github\HexGame\HexGame\Content\</RootDirectory>
+      <LoggerRootDirectory>C:\Documents and Settings\ian\github\HexGame\HexGame\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Documents and Settings\ian\github\HexGame\HexGame\Content\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Documents and Settings\ian\github\HexGame\HexGame\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
-        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v3.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
-        <Value>2009-05-14T11:13:52-06:00</Value>
+        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v3.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
+        <Value>2009-05-14T12:13:52-06:00</Value>
       </Assembly>
       <Assembly>
-        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v3.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
-        <Value>2009-05-14T11:13:52-06:00</Value>
+        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v3.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
+        <Value>2009-05-14T12:13:52-06:00</Value>
       </Assembly>
       <Assembly>
-        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v3.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
-        <Value>2009-05-14T11:13:52-06:00</Value>
+        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v3.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
+        <Value>2009-05-14T12:13:52-06:00</Value>
       </Assembly>
       <Assembly>
-        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v3.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
-        <Value>2009-05-14T11:13:52-06:00</Value>
+        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v3.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
+        <Value>2009-05-14T12:13:52-06:00</Value>
       </Assembly>
       <Assembly>
-        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v3.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
-        <Value>2009-05-14T11:13:52-06:00</Value>
+        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v3.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
+        <Value>2009-05-14T12:13:52-06:00</Value>
       </Assembly>
       <Assembly>
-        <Key>C:\Windows\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\3.0.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2009-10-31T15:40:31.291-06:00</Value>
+        <Key>C:\WINDOWS\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\3.0.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2009-10-04T18:31:36.453125-06:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>
