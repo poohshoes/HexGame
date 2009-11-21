@@ -7,8 +7,15 @@ namespace HexGame
 {
     class PathFinding
     {
+        World world;
+
+        public PathFinding(World world) 
+        {
+            this.world = world;
+        }
+
         // function A*(start,goal)
-        public static Stack<IntVector2> AStar(IntVector2 start, IntVector2 goal, World world)
+        public Stack<IntVector2> AStar(IntVector2 start, IntVector2 goal)
         {
             Node[,] nodeArray = new Node[world.MapSize.X, world.MapSize.Y];
 
@@ -28,7 +35,7 @@ namespace HexGame
             //    g_score[start] := 0                        % Distance from start along optimal path.
             nodeArray[start.X, start.Y].GScore = 0;
             //    h_score[start] := heuristic_estimate_of_distance(start, goal)
-            nodeArray[start.X, start.Y].HScore = huristicDistance(start, goal, world);
+            nodeArray[start.X, start.Y].HScore = huristicDistance(start, goal);
             //    f_score[start] := h_score[start]           % Estimated total distance from start to goal through y.
             //nodeArray[start.X, start.Y].FScore = nodeArray[start.X, start.Y].HScore;
 
@@ -84,7 +91,7 @@ namespace HexGame
                     {
                         yNode.cameFrom = x.Location;
                         yNode.GScore = tentativeGScore;
-                        yNode.HScore = huristicDistance(y, goal, world);
+                        yNode.HScore = huristicDistance(y, goal);
                     }
                 }
             }
@@ -99,7 +106,7 @@ namespace HexGame
         /// <param name="goal"></param>
         /// <param name="world"></param>
         /// <returns></returns>
-        static int huristicDistance(IntVector2 current, IntVector2 goal, World world)
+        int huristicDistance(IntVector2 current, IntVector2 goal)
         {
             double changeX = Math.Abs(current.X - goal.X);
             double changeY = Math.Abs(current.Y - goal.Y);
@@ -113,7 +120,7 @@ namespace HexGame
         }
 
          //function reconstruct_path(came_from,current_node)
-        static Stack<IntVector2> reconstructPath(IntVector2 currentNode, IntVector2 start, Node[,] nodeArray)
+        Stack<IntVector2> reconstructPath(IntVector2 currentNode, IntVector2 start, Node[,] nodeArray)
         {
             //    if came_from[current_node] is set
             //        p = reconstruct_path(came_from,came_from[current_node])

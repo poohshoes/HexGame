@@ -7,13 +7,12 @@ namespace HexGame
 {
     class Shipper : MapItem
     {
-        bool _hasResource = false;
-        Resources _resource;
+        Resource? _resource;
 
-        Stack<IntVector2> _path { get; set; }
+        Path _path { get; set; }
 
         // a reference to the world
-        World _world;
+        protected World _world;
 
         public Shipper(IntVector2 startingPoisition, World world)
             : base(startingPoisition)
@@ -25,46 +24,47 @@ namespace HexGame
         {
             base.Update(totalGameSeconds);
 
-            if (_path.Count == 0)
-            {
-                haveArrivedAtDestination();
-            }
-            else if (_path == null)
-            {
-                getNewPath();
-            }
-            else 
-            {
-                moveAlongPath();
-            }
+            //if (_path.Empty)
+            //{
+            //    _haveArrivedAtDestination();
+            //}
+            //else if (_path == null)
+            //{
+            //    _getNewPath();
+            //}
+            //else 
+            //{
+            //    _moveAlongPath();
+            //}
         }
 
-        private void moveAlongPath()
+        private void _moveAlongPath()
         {
             hexQuoordinates = _path.Pop();
         }
 
-        private void haveArrivedAtDestination() 
+        private void _haveArrivedAtDestination() 
         {
-            if (_hasResource)
-                dropResource();
+            if (_resource == null)
+                _dropResource();
             else
-                getResource();
+                _getResource();
         }
 
-        private void getNewPath()
+        private void _getNewPath()
         {
 
         }
 
-        private void dropResource()
+        private void _dropResource()
         {
-            _hasResource = false;
+            _world.addResource(this.hexQuoordinates, _resource);
+            _resource = null;
         }
 
-        private void getResource()
+        private void _getResource()
         {
-            _hasResource = true;
+            
         }
     }
 }

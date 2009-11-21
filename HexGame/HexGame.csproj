@@ -85,10 +85,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Building.cs" />
+    <Compile Include="ShipperTask.cs" />
     <Compile Include="Farm.cs" />
     <Compile Include="Hex.cs" />
     <Compile Include="IntVector2.cs" />
+    <Compile Include="Path.cs" />
     <Compile Include="PathFinding.cs" />
+    <Compile Include="Resource.cs" />
+    <Compile Include="ResourceDemandManager.cs" />
     <Compile Include="Shipper.cs" />
     <Compile Include="ViewMaster.cs" />
     <Compile Include="MapItem.cs" />

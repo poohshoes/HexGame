@@ -17,12 +17,12 @@ namespace HexGame
     {
         public BuildingTypes BuildingType { get; private set; }
 
-        protected Hex _hex;
+        public Hex hex { get; private set; }
 
         public Building(IntVector2 buildingHexQuoord, BuildingTypes buildingType, Hex hex)
             : base(buildingHexQuoord)
         {
-            _hex = hex;
+            this.hex = hex;
             BuildingType = buildingType;
         }
     }

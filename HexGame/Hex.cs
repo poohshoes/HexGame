@@ -2,30 +2,39 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 
 namespace HexGame
 {
     class Hex
     {
-        public List<Resources> Resources 
+        public List<Resource> Resources 
         {
             get 
             {
                 return _resources;
             }
         }
-        List<Resources> _resources;
+        List<Resource> _resources;
         int _maxResources;
+        public bool IsAtResourceCapacity 
+        {
+            get 
+            {
+                return (_resources.Count == _maxResources);
+            }
+        }
+
         public IntVector2 MapQuoordinate { get; private set; }
 
         // THIS SHOULD ALWAYS BE AT LEAST 1 TO SATISFY PATHFINDING
-        public float MoveCost { private set; get; }
+        public double MoveCost { private set; get; }
 
         public Hex(IntVector2 mapQuoordinate) 
         {
             MapQuoordinate = mapQuoordinate;
             _maxResources = 5;
-            _resources = new List<Resources>(5);
+            _resources = new List<Resource>(5);
             MoveCost = 1;
         }
 
@@ -52,12 +61,14 @@ namespace HexGame
         /// </summary>
         /// <param name="toAdd"></param>
         /// <returns>False if there is no room to add the resource.</returns>
-        public bool AddResource(Resources toAdd) 
+        public bool AddResource(Resource? toAdd) 
         {
+            Debug.Assert(toAdd != null, "Can't add a resource that is null.");
+
             if (_resources.Count >= _maxResources)
                 return false;
 
-            _resources.Add(toAdd);
+            _resources.Add((Resource)toAdd);
             return true;
         }
 
@@ -66,9 +77,11 @@ namespace HexGame
         /// </summary>
         /// <param name="toAdd"></param>
         /// <returns>False if the resource can not be removed or does not exist in the list.</returns>
-        public bool RemoveResource(Resources toRemove)
+        public bool RemoveResource(Resource? toRemove)
         {
-            return _resources.Remove(toRemove);
+            Debug.Assert(toRemove != null, "Can't remove a resource that is null.");
+
+            return _resources.Remove((Resource)toRemove);
         }
     }
 }

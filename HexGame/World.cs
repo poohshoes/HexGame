@@ -6,9 +6,10 @@ using Microsoft.Xna.Framework;
 
 namespace HexGame
 {
-    enum Resources { Food };
     class World
     {
+        public PathFinding PathFinder { get; private set; }
+
         public IntVector2 MapSize { get; private set; }
         Hex[,] _map;
 
@@ -105,7 +106,7 @@ namespace HexGame
         /// <param name="hexToAddTo"></param>
         /// <param name="resource"></param>
         /// <returns>False if the resource was not added.</returns>
-        public bool addResource(IntVector2 hexToAddTo, Resources resource)
+        public bool addResource(IntVector2 hexToAddTo, Resource? resource)
         {
             if(_map[hexToAddTo.X, hexToAddTo.Y] == null)
                 _map[hexToAddTo.X, hexToAddTo.Y] = new Hex(hexToAddTo);
@@ -119,7 +120,7 @@ namespace HexGame
         /// <param name="hexToRemoveFrom"></param>
         /// <param name="resource"></param>
         /// <returns>False if the resource was not removed.</returns>
-        public bool removeResource(IntVector2 hexToRemoveFrom, Resources resource) 
+        public bool removeResource(IntVector2 hexToRemoveFrom, Resource? resource) 
         {
             if (_map[hexToRemoveFrom.X, hexToRemoveFrom.Y] == null)
                 return false;
