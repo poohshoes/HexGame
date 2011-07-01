@@ -44,3 +44,9 @@ _ReSharper*/
 
 # Office Temp Files
 ~$*
+
+# Content Files
+Content/bin/
+Content/obj/
+Content/Thumbs.db
+Content/HexGameContent.contentproj.user
