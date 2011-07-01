@@ -1,56 +1,93 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace HexGame
 {
     class Shipper : MapItem
     {
-        Resource _resource;
+        private readonly ResourceType _shippedResourceType;
+        private readonly Hex _resourceSourceTile;
+        private readonly Hex _resourceDestinationTile;
+        private readonly PathFinding _pathFinding;
 
-        Path _path { get; set; }
-
-        protected World _world;
-
-        public Shipper(IntVector2 startingPoisition, World world)
-            : base(startingPoisition)
+        private bool IsAtDestinationTile
         {
-            _world = world;
+            get { return base.HexTile == _resourceDestinationTile; }
+        }
+
+        private bool IsAtSourceTile
+        {
+            get { return base.HexTile == _resourceSourceTile; }
+        }
+
+        private Resource _carriedResource;
+        private Path _path;
+        
+        public Shipper(IntVector2 startingPoisition, Hex resourceSourceTile, Hex resourceDestinationTile, ResourceType shippedResourceType, World world)
+            : base(startingPoisition, world)
+        {
+            _resourceSourceTile = resourceSourceTile;
+            _resourceDestinationTile = resourceDestinationTile;
+            _shippedResourceType = shippedResourceType;
+
+            _pathFinding = new PathFinding(world);
         }
 
         public override void Update(double totalGameSeconds)
         {
+            if (IsAtSourceTile)
+            {
+                PickUpResource();
+                RecalculatePath(_resourceSourceTile.MapQuoordinate, _resourceDestinationTile.MapQuoordinate);
+            }
+            else if (IsAtDestinationTile)
+            {
+                DropResource();
+                RecalculatePath(_resourceDestinationTile.MapQuoordinate, _resourceSourceTile.MapQuoordinate);
+            }
+            else
+                MoveAlongPath();
+
             base.Update(totalGameSeconds);
+        }
+
+        private void RecalculatePath(IntVector2 startPosition, IntVector2 endPosition)
+        {
+            var positionPath = _pathFinding.AStar(startPosition, endPosition);
+            var hexPath = positionPath.Select(v => World.GetHexAt(v));
+            Stack<Hex> initialPath = new Stack<Hex>(hexPath);
+            _path = new Path(initialPath);
         }
 
         private void MoveAlongPath()
         {
-            hexQuoordinates = _path.Pop();
+            var nextTile = _path.GetNextMapTile();
+            if (nextTile == null)
+                return;
+
+            base.HexQuoordinates = nextTile.MapQuoordinate;
         }
 
-        private void HaveArrivedAtDestination() 
+        private void PickUpResource()
         {
-            if (_resource == null)
-                DropResource();
-            else
-                GetResource();
-        }
+            var tileResource = base.HexTile.Resources.FirstOrDefault(r => r.ResourceType == _shippedResourceType);
+            if (tileResource == null)
+                return;
 
-        private void GetNewPath()
-        {
+            bool pickedUpResource = _resourceDestinationTile.RemoveResource(tileResource);
+            if (!pickedUpResource)
+                return;
 
+            _carriedResource = tileResource;
         }
 
         private void DropResource()
         {
-            _world.addResource(this.hexQuoordinates, _resource);
-            _resource = null;
-        }
+            if (_carriedResource == null)
+                return;
 
-        private void GetResource()
-        {
-            
+            base.HexTile.AddResource(_carriedResource);
+            _carriedResource = null;
         }
     }
 }

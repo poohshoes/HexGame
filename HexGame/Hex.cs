@@ -6,6 +6,9 @@ using System.Diagnostics;
 
 namespace HexGame
 {
+    /// <summary>
+    /// A map tile
+    /// </summary>
     class Hex
     {
         public List<Resource> Resources 

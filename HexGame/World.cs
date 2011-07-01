@@ -60,7 +60,7 @@ namespace HexGame
             }
         }
 
-        public Hex getHexAt(IntVector2 quoord) 
+        public Hex GetHexAt(IntVector2 quoord) 
         {
             if(_map[quoord.X, quoord.Y] == null)
                 _map[quoord.X, quoord.Y] = new Hex(quoord);

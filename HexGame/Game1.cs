@@ -41,12 +41,12 @@ namespace HexGame
             _mouseInputHandler = new MouseInputHandler(this);
 
             _world = new World();
-            _world.AddMapItem(new Farm(new IntVector2(4, 4), _world.getHexAt(new IntVector2(4, 4))));
-            _world.AddMapItem(new Farm(new IntVector2(5, 3), _world.getHexAt(new IntVector2(5, 3))));
-            _world.AddMapItem(new Farm(new IntVector2(6, 5), _world.getHexAt(new IntVector2(6, 5))));
-            _world.AddMapItem(new Farm(new IntVector2(4, 5), _world.getHexAt(new IntVector2(4, 5))));
-            _world.AddMapItem(new Farm(new IntVector2(5, 5), _world.getHexAt(new IntVector2(5, 5))));
-            _world.AddMapItem(new Warehouse(new IntVector2(5, 4), _world.getHexAt(new IntVector2(5, 4))));
+            _world.AddMapItem(new Farm(_world.GetHexAt(new IntVector2(4, 4)), _world));
+            _world.AddMapItem(new Farm(_world.GetHexAt(new IntVector2(5, 3)), _world));
+            _world.AddMapItem(new Farm(_world.GetHexAt(new IntVector2(6, 5)), _world));
+            _world.AddMapItem(new Farm(_world.GetHexAt(new IntVector2(4, 5)), _world));
+            _world.AddMapItem(new Farm(_world.GetHexAt(new IntVector2(5, 5)), _world));
+            _world.AddMapItem(new Warehouse(_world.GetHexAt(new IntVector2(5, 4)), _world));
 
             _drawingMaster = new ViewMaster(this, _world, _mouseInputHandler);
 

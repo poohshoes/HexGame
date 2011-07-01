@@ -10,11 +10,10 @@ namespace HexGame
         const int _secondsToGenerateFood = 5;
         double _timeInSecondsForNextFoodGeneration;
 
-        public Farm(IntVector2 farmLocation, Hex hex)
-            : base(farmLocation, BuildingTypes.Farm, hex)
+        public Farm(Hex hex, World world)
+            : base(BuildingTypes.Farm, hex, world)
         {
             _timeInSecondsForNextFoodGeneration = _secondsToGenerateFood;
-            //_hex.AddResource(Resources.Food);
         }
 
         // every so often a farm generates food
@@ -23,8 +22,9 @@ namespace HexGame
             if (_timeInSecondsForNextFoodGeneration <= totalGameSeconds)
             {
                 _timeInSecondsForNextFoodGeneration += _secondsToGenerateFood;
+                
                 // if there is room add a food
-                base.hex.AddResource(new Resource(ResourceTypes.Food));
+                base.HexTile.AddResource(new Resource(ResourceType.Food));
             }
         }
     }

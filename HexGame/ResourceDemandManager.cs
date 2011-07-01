@@ -25,7 +25,7 @@ namespace HexGame
         /// <param name="pathToStorageLocation"></param>
         /// <param name="travelingFrom"></param>
         /// <returns>True if it finds a storeage location, false otherwise.</returns>
-        public bool GetStorageLocation(ResourceTypes resourceType, IntVector2 travelingFrom, out Path pathToStorageLocation) 
+        public bool GetStorageLocation(ResourceType resourceType, IntVector2 travelingFrom, out Path pathToStorageLocation) 
         {
             throw new NotImplementedException();
             //List<Warehouse> warehousesWithRoom = warehouses.Where(warehouse => !warehouse.hex.IsAtResourceCapacity);

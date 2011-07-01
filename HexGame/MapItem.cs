@@ -8,11 +8,18 @@ namespace HexGame
 {
     abstract class MapItem
     {
-        public IntVector2 hexQuoordinates;
+        public World World { get; private set; }
 
-        public MapItem(IntVector2 hexQuoords) 
+        public IntVector2 HexQuoordinates { get; protected set; }
+
+        public Hex HexTile
         {
-            hexQuoordinates = hexQuoords;
+            get { return World.GetHexAt(HexQuoordinates); }
+        }
+
+        public MapItem(IntVector2 hexQuoords, World world) 
+        {
+            HexQuoordinates = hexQuoords;
         }
 
         virtual public void Update(double totalGameSeconds) 

@@ -5,15 +5,14 @@ using System.Text;
 
 namespace HexGame
 {
-    enum ResourceTypes { Food };
+    enum ResourceType { Food };
+
     class Resource
     {
-        ResourceTypes ResourceType;
-        bool NeedsPickup;
+        public readonly ResourceType ResourceType;
 
-        public Resource(ResourceTypes resourceType) 
+        public Resource(ResourceType resourceType) 
         {
-            NeedsPickup = true;
             ResourceType = resourceType;
         }
     }

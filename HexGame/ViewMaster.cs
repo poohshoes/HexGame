@@ -165,11 +165,11 @@ namespace HexGame
 
         void _drawBuildings() 
         {
-            foreach (Building b in _world.MapItems) 
+            foreach (var b in _world.MapItems.OfType<Building>()) 
             {
                 _spriteBatch.Draw(
                         _getBuildingTexture(b.BuildingType),
-                        _getScreenPositionOfBuilding(b.hexQuoordinates).ToVector2(),
+                        _getScreenPositionOfBuilding(b.HexQuoordinates).ToVector2(),
                         Color.White
                         );
             }
