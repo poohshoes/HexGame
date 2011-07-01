@@ -39,6 +39,7 @@ namespace HexGame
             _world.AddMapItem(new Farm(_world.GetHexAt(new IntVector2(5, 5)), _world));
             _world.AddMapItem(new Warehouse(_world.GetHexAt(new IntVector2(5, 4)), _world));
             _world.AddMapItem(new Unit(UnitType.Infantry, new IntVector2(6, 6), _world));
+            _world.AddMapItem(new Unit(UnitType.Infantry, new IntVector2(8, 8), _world));
             
             var shipperHex = _world.GetHexAt(new IntVector2(0, 0));
             var resourceSourceTile = _world.GetHexAt(new IntVector2(4,4));
