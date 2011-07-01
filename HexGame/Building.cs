@@ -1,6 +1,6 @@
 ﻿namespace HexGame
 {
-    public enum BuildingTypes
+    public enum BuildingType
     {
         Farm,
         Warehouse,
@@ -9,9 +9,9 @@
 
     abstract class Building : MapItem
     {
-        public BuildingTypes BuildingType { get; private set; }
+        public BuildingType BuildingType { get; private set; }
 
-        public Building(BuildingTypes buildingType, Hex hex, World world)
+        public Building(BuildingType buildingType, Hex hex, World world)
             : base(hex.MapQuoordinate, world)
         {
             BuildingType = buildingType;

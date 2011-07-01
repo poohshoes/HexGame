@@ -37,7 +37,7 @@ namespace HexGame
             _world.AddMapItem(new Farm(_world.GetHexAt(new IntVector2(4, 5)), _world));
             _world.AddMapItem(new Farm(_world.GetHexAt(new IntVector2(5, 5)), _world));
             _world.AddMapItem(new Warehouse(_world.GetHexAt(new IntVector2(5, 4)), _world));
-            _world.AddMapItem(new Unit(new IntVector2(6, 6), _world));
+            _world.AddMapItem(new Unit(UnitType.Infantry, new IntVector2(6, 6), _world));
 
             _drawingMaster = new ViewMaster(this, _world, _mouseInputHandler);
 

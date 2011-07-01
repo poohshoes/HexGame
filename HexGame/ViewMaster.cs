@@ -18,6 +18,7 @@ namespace HexGame
         Texture2D _hexHighlightTexture;
         Texture2D _farmTexture;
         Texture2D _warehouseTexture;
+        Texture2D _infantryTexture;
 
         Texture2D _hexTexture;
         readonly IntVector2 _hexTextureDims;
@@ -39,6 +40,7 @@ namespace HexGame
             _hexHighlightTexture = game.Content.Load<Texture2D>("hexHighlight");
             _farmTexture = game.Content.Load<Texture2D>("farm");
             _warehouseTexture = game.Content.Load<Texture2D>("warehouse");
+            _infantryTexture = game.Content.Load<Texture2D>("infantry");
 
             _hexTexture = game.Content.Load<Texture2D>("hexGrass");
             _hexTextureDims.X = _hexTexture.Width;
@@ -169,7 +171,7 @@ namespace HexGame
             {
                 _spriteBatch.Draw(
                         _getBuildingTexture(b.BuildingType),
-                        _getScreenPositionOfBuilding(b.HexQuoordinates).ToVector2(),
+                        _getScreenPositionOfMapItem(b.HexQuoordinates).ToVector2(),
                         Color.White
                         );
             }
@@ -180,8 +182,8 @@ namespace HexGame
             foreach (Unit u in _world.MapItems.Where(x => x is Unit))
             {
                 _spriteBatch.Draw(
-                        _warehouseTexture,
-                        _getScreenPositionOfBuilding(u.HexQuoordinates).ToVector2(),
+                        _getUnitTexture(u.UnitType),
+                        _getScreenPositionOfMapItem(u.HexQuoordinates).ToVector2(),
                         Color.White
                         );
             }
@@ -202,19 +204,29 @@ namespace HexGame
             }
         }
 
-        Texture2D _getBuildingTexture(BuildingTypes building)
+        Texture2D _getBuildingTexture(BuildingType building)
         {
             switch (building) 
             {
-                case BuildingTypes.Warehouse:
+                case BuildingType.Warehouse:
                     return _warehouseTexture;
-                case BuildingTypes.Farm:
+                case BuildingType.Farm:
                     return _farmTexture;
             }
             throw new Exception("Building texture not supplied.");
         }
 
-        IntVector2 _getScreenPositionOfBuilding(IntVector2 buildingQuoords) 
+        Texture2D _getUnitTexture(UnitType unit)
+        {
+            switch(unit)
+            {
+                case UnitType.Infantry:
+                    return _infantryTexture;
+            }
+            throw new Exception("Unit texture not supplied.");
+        }
+
+        IntVector2 _getScreenPositionOfMapItem(IntVector2 buildingQuoords) 
         {
             return _getScreenPositionOfHex(buildingQuoords) + _buildingOffsetFromHex;
         }

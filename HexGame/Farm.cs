@@ -6,7 +6,7 @@ namespace HexGame
         double _timeInSecondsForNextFoodGeneration;
 
         public Farm(Hex hex, World world)
-            : base(BuildingTypes.Farm, hex, world)
+            : base(BuildingType.Farm, hex, world)
         {
             _timeInSecondsForNextFoodGeneration = _secondsToGenerateFood;
         }
