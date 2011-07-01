@@ -1,22 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
-using Microsoft.Xna.Framework.Net;
-using Microsoft.Xna.Framework.Storage;
 
 namespace HexGame
 {
     /// <summary>
     /// This is the main type for your game
     /// </summary>
-    public class Game1 : Microsoft.Xna.Framework.Game
+    public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
         ViewMaster _drawingMaster;
@@ -37,16 +27,17 @@ namespace HexGame
         /// </summary>
         protected override void Initialize()
         {
-            this.IsMouseVisible = true;
+            IsMouseVisible = true;
             _mouseInputHandler = new MouseInputHandler(this);
 
             _world = new World();
-            _world.AddMapItem(new Farm(new IntVector2(4, 4), _world.getHexAt(new IntVector2(4, 4))));
-            _world.AddMapItem(new Farm(new IntVector2(5, 3), _world.getHexAt(new IntVector2(5, 3))));
-            _world.AddMapItem(new Farm(new IntVector2(6, 5), _world.getHexAt(new IntVector2(6, 5))));
-            _world.AddMapItem(new Farm(new IntVector2(4, 5), _world.getHexAt(new IntVector2(4, 5))));
-            _world.AddMapItem(new Farm(new IntVector2(5, 5), _world.getHexAt(new IntVector2(5, 5))));
-            _world.AddMapItem(new Warehouse(new IntVector2(5, 4), _world.getHexAt(new IntVector2(5, 4))));
+            _world.AddMapItem(new Farm(new IntVector2(4, 4), _world.getHexAt(new IntVector2(4, 4)), _world));
+            _world.AddMapItem(new Farm(new IntVector2(5, 3), _world.getHexAt(new IntVector2(5, 3)), _world));
+            _world.AddMapItem(new Farm(new IntVector2(6, 5), _world.getHexAt(new IntVector2(6, 5)), _world));
+            _world.AddMapItem(new Farm(new IntVector2(4, 5), _world.getHexAt(new IntVector2(4, 5)), _world));
+            _world.AddMapItem(new Farm(new IntVector2(5, 5), _world.getHexAt(new IntVector2(5, 5)), _world));
+            _world.AddMapItem(new Warehouse(new IntVector2(5, 4), _world.getHexAt(new IntVector2(5, 4)), _world));
+            _world.AddMapItem(new Unit(new IntVector2(6, 6), _world));
 
             _drawingMaster = new ViewMaster(this, _world, _mouseInputHandler);
 

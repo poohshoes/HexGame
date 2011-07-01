@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Ryan\Desktop\HexGame\HexGame\bin\x86\Debug\Content\hexGrass.xnb</Output>
-      <Time>2011-07-01T13:41:04.4671311-06:00</Time>
+      <Output>E:\HexGame\HexGame\HexGame\bin\x86\Debug\Content\hexGrass.xnb</Output>
+      <Time>2011-07-01T13:46:56.2290882-06:00</Time>
     </Item>
     <Item>
       <Source>farm.png</Source>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Ryan\Desktop\HexGame\HexGame\bin\x86\Debug\Content\farm.xnb</Output>
-      <Time>2011-07-01T13:41:04.4671311-06:00</Time>
+      <Output>E:\HexGame\HexGame\HexGame\bin\x86\Debug\Content\farm.xnb</Output>
+      <Time>2011-07-01T13:46:56.2280881-06:00</Time>
     </Item>
     <Item>
       <Source>farmTest.png</Source>
@@ -25,8 +25,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Ryan\Desktop\HexGame\HexGame\bin\x86\Debug\Content\farmTest.xnb</Output>
-      <Time>2011-07-01T13:41:04.4671311-06:00</Time>
+      <Output>E:\HexGame\HexGame\HexGame\bin\x86\Debug\Content\farmTest.xnb</Output>
+      <Time>2011-07-01T13:46:56.2280881-06:00</Time>
     </Item>
     <Item>
       <Source>hexHighlight.png</Source>
@@ -34,8 +34,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Ryan\Desktop\HexGame\HexGame\bin\x86\Debug\Content\hexHighlight.xnb</Output>
-      <Time>2011-07-01T13:41:04.4671311-06:00</Time>
+      <Output>E:\HexGame\HexGame\HexGame\bin\x86\Debug\Content\hexHighlight.xnb</Output>
+      <Time>2011-07-01T13:46:56.2290882-06:00</Time>
     </Item>
     <Item>
       <Source>resourceFood.png</Source>
@@ -43,8 +43,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Ryan\Desktop\HexGame\HexGame\bin\x86\Debug\Content\resourceFood.xnb</Output>
-      <Time>2011-07-01T13:41:04.4771311-06:00</Time>
+      <Output>E:\HexGame\HexGame\HexGame\bin\x86\Debug\Content\resourceFood.xnb</Output>
+      <Time>2011-07-01T13:46:56.2330884-06:00</Time>
     </Item>
     <Item>
       <Source>warehouse.png</Source>
@@ -52,8 +52,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Ryan\Desktop\HexGame\HexGame\bin\x86\Debug\Content\warehouse.xnb</Output>
-      <Time>2011-07-01T13:41:04.4771311-06:00</Time>
+      <Output>E:\HexGame\HexGame\HexGame\bin\x86\Debug\Content\warehouse.xnb</Output>
+      <Time>2011-07-01T13:46:56.2330884-06:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -61,10 +61,10 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Ryan\Desktop\HexGame\HexGame\Content\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Ryan\Desktop\HexGame\HexGame\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Ryan\Desktop\HexGame\HexGame\Content\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Ryan\Desktop\HexGame\HexGame\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>E:\HexGame\HexGame\HexGame\Content\</RootDirectory>
+      <LoggerRootDirectory>E:\HexGame\HexGame\HexGame\</LoggerRootDirectory>
+      <IntermediateDirectory>E:\HexGame\HexGame\HexGame\Content\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>E:\HexGame\HexGame\HexGame\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
@@ -93,7 +93,7 @@
       </Assembly>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2011-01-20T22:29:02.1079897-07:00</Value>
+        <Value>2011-01-20T20:32:16.0563844-07:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>

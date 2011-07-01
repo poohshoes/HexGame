@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
 
 namespace HexGame
 {
@@ -156,14 +154,14 @@ namespace HexGame
             if (startHex == null)
                 startingCost = 1;
             else
-                startingCost = startHex.MoveCost;
+                startingCost = (float)startHex.MoveCost;
 
             Hex endHex = _map[endingLocation.X, endingLocation.Y];
             float endingCost;
             if (endHex == null)
                 endingCost = 1;
             else
-                endingCost = endHex.MoveCost;
+                endingCost = (float)endHex.MoveCost;
 
             return (startingCost + endingCost) / 2;
         }

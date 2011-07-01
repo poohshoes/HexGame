@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
-
-namespace HexGame
+﻿namespace HexGame
 {
     abstract class MapItem
     {
-        public IntVector2 hexQuoordinates;
+        public IntVector2 HexQuoordinates;
 
-        public MapItem(IntVector2 hexQuoords) 
+        // a reference to the world
+        protected World _world;
+
+        protected MapItem(IntVector2 hexQuoords, World world) 
         {
-            hexQuoordinates = hexQuoords;
+            HexQuoordinates = hexQuoords;
+            _world = world;
         }
 
         virtual public void Update(double totalGameSeconds) 

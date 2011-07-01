@@ -1,23 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace HexGame
+﻿namespace HexGame
 {
-    class Shipper : MapItem
+    class Shipper : MobileMapItem
     {
         Resource? _resource;
 
-        Path _path { get; set; }
-
-        // a reference to the world
-        protected World _world;
-
         public Shipper(IntVector2 startingPoisition, World world)
-            : base(startingPoisition)
+            : base(startingPoisition, world)
         {
-            _world = world;
         }
 
         public override void Update(double totalGameSeconds)
@@ -38,12 +27,7 @@ namespace HexGame
             //}
         }
 
-        private void _moveAlongPath()
-        {
-            hexQuoordinates = _path.Pop();
-        }
-
-        private void _haveArrivedAtDestination() 
+        private void _haveArrivedAtDestination()
         {
             if (_resource == null)
                 _dropResource();
@@ -51,14 +35,9 @@ namespace HexGame
                 _getResource();
         }
 
-        private void _getNewPath()
-        {
-
-        }
-
         private void _dropResource()
         {
-            _world.addResource(this.hexQuoordinates, _resource);
+            _world.addResource(this.HexQuoordinates, _resource);
             _resource = null;
         }
 

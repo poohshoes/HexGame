@@ -116,6 +116,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Building.cs" />
+    <Compile Include="MobileMapItem.cs" />
     <Compile Include="ShipperTask.cs" />
     <Compile Include="Farm.cs" />
     <Compile Include="Hex.cs" />
@@ -125,6 +126,7 @@
     <Compile Include="Resource.cs" />
     <Compile Include="ResourceDemandManager.cs" />
     <Compile Include="Shipper.cs" />
+    <Compile Include="Unit.cs" />
     <Compile Include="ViewMaster.cs" />
     <Compile Include="MapItem.cs" />
     <Compile Include="MouseInputHandler.cs" />

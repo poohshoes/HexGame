@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
-
-namespace HexGame
+﻿namespace HexGame
 {
     public enum BuildingTypes
     {
@@ -19,8 +13,8 @@ namespace HexGame
 
         public Hex hex { get; private set; }
 
-        public Building(IntVector2 buildingHexQuoord, BuildingTypes buildingType, Hex hex)
-            : base(buildingHexQuoord)
+        public Building(IntVector2 buildingHexQuoord, BuildingTypes buildingType, Hex hex, World world)
+            : base(buildingHexQuoord, world)
         {
             this.hex = hex;
             BuildingType = buildingType;

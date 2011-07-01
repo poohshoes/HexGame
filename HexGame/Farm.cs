@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace HexGame
+﻿namespace HexGame
 {
     class Farm : Building
     {
         const int _secondsToGenerateFood = 5;
         double _timeInSecondsForNextFoodGeneration;
 
-        public Farm(IntVector2 farmLocation, Hex hex)
-            : base(farmLocation, BuildingTypes.Farm, hex)
+        public Farm(IntVector2 farmLocation, Hex hex, World world)
+            : base(farmLocation, BuildingTypes.Farm, hex, world)
         {
             _timeInSecondsForNextFoodGeneration = _secondsToGenerateFood;
             //_hex.AddResource(Resources.Food);
@@ -24,7 +19,7 @@ namespace HexGame
             {
                 _timeInSecondsForNextFoodGeneration += _secondsToGenerateFood;
                 // if there is room add a food
-                _hex.AddResource(new Resource(ResourceTypes.Food));
+                hex.AddResource(new Resource(ResourceTypes.Food));
             }
         }
     }
