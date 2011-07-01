@@ -116,6 +116,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Building.cs" />
+    <Compile Include="Image.cs" />
     <Compile Include="MobileMapItem.cs" />
     <Compile Include="ShipperTask.cs" />
     <Compile Include="Farm.cs" />

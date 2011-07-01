@@ -14,20 +14,18 @@ namespace HexGame
     {
         World _world;
 
-        Texture2D _foodTexture;
-        Texture2D _hexHighlightTexture;
-        Texture2D _farmTexture;
-        Texture2D _warehouseTexture;
-        Texture2D _infantryTexture;
-        Texture2D _shipperTexture;
+        Image _foodTexture;
+        Image _hexHighlightTexture;
+        Image _farmTexture;
+        Image _warehouseTexture;
+        Image _infantryTexture;
+        Image _shipperTexture;
+        Image _hexTexture;
 
-        Texture2D _hexTexture;
         readonly IntVector2 _hexTextureDims;
-
         const int _hexXOverlapPixels = 20;
 
         readonly IntVector2 _worldScreenOffset = new IntVector2(10, 10);
-        readonly IntVector2 _buildingOffsetFromHex = new IntVector2(20, 5);
 
         SpriteBatch _spriteBatch;
 
@@ -37,16 +35,18 @@ namespace HexGame
 
             _spriteBatch = new SpriteBatch(game.GraphicsDevice);
 
-            _foodTexture = game.Content.Load<Texture2D>("resourceFood");
-            _hexHighlightTexture = game.Content.Load<Texture2D>("hexHighlight");
-            _farmTexture = game.Content.Load<Texture2D>("farm");
-            _warehouseTexture = game.Content.Load<Texture2D>("warehouse");
-            _infantryTexture = game.Content.Load<Texture2D>("infantry");
-            _shipperTexture = game.Content.Load<Texture2D>("shipper");
+            _foodTexture = new Image(game.Content.Load<Texture2D>("resourceFood"));
+            _hexHighlightTexture = new Image(game.Content.Load<Texture2D>("hexHighlight"));
 
-            _hexTexture = game.Content.Load<Texture2D>("hexGrass");
-            _hexTextureDims.X = _hexTexture.Width;
-            _hexTextureDims.Y = _hexTexture.Height;
+            _farmTexture = new Image(game.Content.Load<Texture2D>("farm"), new IntVector2(25, 0));
+            _warehouseTexture = new Image(game.Content.Load<Texture2D>("warehouse"), new IntVector2(20, 5));
+
+            _infantryTexture = new Image(game.Content.Load<Texture2D>("infantry"), new IntVector2(15, -10));
+            _shipperTexture = new Image(game.Content.Load<Texture2D>("shipper"), new IntVector2(0, -5));
+
+            _hexTexture = new Image(game.Content.Load<Texture2D>("hexGrass"));
+            _hexTextureDims.X = _hexTexture.Texture.Width;
+            _hexTextureDims.Y = _hexTexture.Texture.Height;
 
         }
 
@@ -132,14 +132,14 @@ namespace HexGame
                 for (int i = 0; i < h.Resources.Count; i++) 
                 {
                     Vector2 drawLocation = new Vector2(
-                        (_foodTexture.Width / 2) + i * 4,
+                        (_foodTexture.Texture.Width / 2) + i * 4,
                         (_hexTextureDims.Y / 2) - 4 + i * 5
                         );
 
                     drawLocation += _getScreenPositionOfHex(h.MapQuoordinate).ToVector2();
 
                     _spriteBatch.Draw(
-                        _foodTexture,
+                        _foodTexture.Texture,
                         drawLocation,
                         Color.White
                         );
@@ -152,7 +152,7 @@ namespace HexGame
             if (_world.SelectedHex != null) 
             {
                 _spriteBatch.Draw(
-                        _hexHighlightTexture,
+                        _hexHighlightTexture.Texture,
                         _getScreenPositionOfHex(_world.SelectedHex.Value).ToVector2(),
                         Color.White
                         );
@@ -161,11 +161,12 @@ namespace HexGame
 
         void _drawBuildings() 
         {
-            foreach (Building b in _world.MapItems.Where(x => x is Building)) 
+            foreach (Building b in _world.MapItems.Where(x => x is Building))
             {
+                Image buildingImage = _getBuildingImage(b.BuildingType);
                 _spriteBatch.Draw(
-                        _getBuildingTexture(b.BuildingType),
-                        _getScreenPositionOfMapItem(b.HexQuoordinates).ToVector2(),
+                        buildingImage.Texture,
+                        _getScreenPositionOfMapItem(b, buildingImage).ToVector2(),
                         Color.White
                         );
             }
@@ -175,15 +176,16 @@ namespace HexGame
         {
             foreach (Unit u in _world.MapItems.Where(x => x is Unit))
             {
+                Image unitImage = _getUnitImage(u.UnitType);
                 _spriteBatch.Draw(
-                        _getUnitTexture(u.UnitType),
-                        _getScreenPositionOfMapItem(u.HexQuoordinates).ToVector2(),
+                        unitImage.Texture,
+                        _getScreenPositionOfMapItem(u, unitImage).ToVector2(),
                         Color.White
                         );
             }
 
             foreach (var shipper in _world.MapItems.OfType<Shipper>())
-                _spriteBatch.Draw(_shipperTexture, _getScreenPositionOfMapItem(shipper.HexQuoordinates).ToVector2(), Color.White);
+                _spriteBatch.Draw(_shipperTexture.Texture, _getScreenPositionOfMapItem(shipper, _shipperTexture).ToVector2(), Color.White);
         }
 
         void _drawMapTiles() 
@@ -193,7 +195,7 @@ namespace HexGame
                 for (int y = 0; y < _world.MapSize.Y; y++)
                 {
                     _spriteBatch.Draw(
-                        _hexTexture,
+                        _hexTexture.Texture,
                         _getScreenPositionOfHex(new IntVector2(x, y)).ToVector2(),
                         Color.White
                         );
@@ -201,7 +203,7 @@ namespace HexGame
             }
         }
 
-        Texture2D _getBuildingTexture(BuildingType building)
+        Image _getBuildingImage(BuildingType building)
         {
             switch (building) 
             {
@@ -213,7 +215,7 @@ namespace HexGame
             throw new Exception("Building texture not supplied.");
         }
 
-        Texture2D _getUnitTexture(UnitType unit)
+        Image _getUnitImage(UnitType unit)
         {
             switch(unit)
             {
@@ -223,9 +225,9 @@ namespace HexGame
             throw new Exception("Unit texture not supplied.");
         }
 
-        IntVector2 _getScreenPositionOfMapItem(IntVector2 buildingQuoords) 
+        IntVector2 _getScreenPositionOfMapItem(MapItem mapItem, Image mapItemImage) 
         {
-            return _getScreenPositionOfHex(buildingQuoords) + _buildingOffsetFromHex;
+            return _getScreenPositionOfHex(mapItem.HexQuoordinates) + mapItemImage.DrawOffset;
         }
 
         IntVector2 _getScreenPositionOfHex(IntVector2 hexQuoords) 
