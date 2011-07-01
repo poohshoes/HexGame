@@ -6,7 +6,7 @@ using System.Text;
 namespace HexGame
 {
     enum ResourceTypes { Food };
-    struct Resource
+    class Resource
     {
         ResourceTypes ResourceType;
         bool NeedsPickup;

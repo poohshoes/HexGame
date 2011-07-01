@@ -7,11 +7,10 @@ namespace HexGame
 {
     class Shipper : MapItem
     {
-        Resource? _resource;
+        Resource _resource;
 
         Path _path { get; set; }
 
-        // a reference to the world
         protected World _world;
 
         public Shipper(IntVector2 startingPoisition, World world)
@@ -23,46 +22,33 @@ namespace HexGame
         public override void Update(double totalGameSeconds)
         {
             base.Update(totalGameSeconds);
-
-            //if (_path.Empty)
-            //{
-            //    _haveArrivedAtDestination();
-            //}
-            //else if (_path == null)
-            //{
-            //    _getNewPath();
-            //}
-            //else 
-            //{
-            //    _moveAlongPath();
-            //}
         }
 
-        private void _moveAlongPath()
+        private void MoveAlongPath()
         {
             hexQuoordinates = _path.Pop();
         }
 
-        private void _haveArrivedAtDestination() 
+        private void HaveArrivedAtDestination() 
         {
             if (_resource == null)
-                _dropResource();
+                DropResource();
             else
-                _getResource();
+                GetResource();
         }
 
-        private void _getNewPath()
+        private void GetNewPath()
         {
 
         }
 
-        private void _dropResource()
+        private void DropResource()
         {
             _world.addResource(this.hexQuoordinates, _resource);
             _resource = null;
         }
 
-        private void _getResource()
+        private void GetResource()
         {
             
         }

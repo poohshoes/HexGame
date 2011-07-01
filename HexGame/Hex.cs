@@ -61,7 +61,7 @@ namespace HexGame
         /// </summary>
         /// <param name="toAdd"></param>
         /// <returns>False if there is no room to add the resource.</returns>
-        public bool AddResource(Resource? toAdd) 
+        public bool AddResource(Resource toAdd) 
         {
             Debug.Assert(toAdd != null, "Can't add a resource that is null.");
 
@@ -77,7 +77,7 @@ namespace HexGame
         /// </summary>
         /// <param name="toAdd"></param>
         /// <returns>False if the resource can not be removed or does not exist in the list.</returns>
-        public bool RemoveResource(Resource? toRemove)
+        public bool RemoveResource(Resource toRemove)
         {
             Debug.Assert(toRemove != null, "Can't remove a resource that is null.");
 
