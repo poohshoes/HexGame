@@ -37,7 +37,11 @@ namespace HexGame
             //}
 
             //Warehouse closestWarehouse = warehousesWithRoom[0];
+<<<<<<< HEAD
+            //Path closestWarehousePath = PathFinding.AStar(travelingFrom, warehousesWithRoom[0].hexQuoordinates);
+=======
             //Path closestWarehousePath = PathFinding.AStar(travelingFrom, warehousesWithRoom[0].hexQuoordinates, );
+>>>>>>> 7e633d9a0c99c4b9c2c3eb794e58eec57f01dbd7
 
             //// If there are performance issues we could use the heuristic instead of the whole path finding alg.
             //for (int i = 1; i < ) 

@@ -1,4 +1,4 @@
-namespace HexGame
+﻿namespace HexGame
 {
     class Farm : Building
     {
@@ -19,7 +19,11 @@ namespace HexGame
             {
                 _timeInSecondsForNextFoodGeneration += _secondsToGenerateFood;
                 // if there is room add a food
+<<<<<<< HEAD
+                hex.AddResource(new Resource(ResourceTypes.Food));
+=======
                 base.hex.AddResource(new Resource(ResourceTypes.Food));
+>>>>>>> 7e633d9a0c99c4b9c2c3eb794e58eec57f01dbd7
             }
         }
     }
