@@ -40,6 +40,7 @@ namespace HexGame
         {
             _pathFinding = new PathFinding(world);
             IsMoveEnabled = true;
+            MoveIntervalInSeconds = 0.25;
         }
 
         private void RecalculatePath()
@@ -62,13 +63,14 @@ namespace HexGame
                 OnArrivedAtDestination();
         }
 
-        private readonly double _moveInterval = 0.25;
+        protected double MoveIntervalInSeconds { get; set; }
+
         private double _lastMoveTime;
 
         public override void Update(double totalGameSeconds)
         {
             base.Update(totalGameSeconds);
-            if (IsMoveEnabled && DestinationTile != null && (totalGameSeconds - _lastMoveTime) >= _moveInterval)
+            if (IsMoveEnabled && DestinationTile != null && (totalGameSeconds - _lastMoveTime) >= MoveIntervalInSeconds)
             {
                 MoveAlongPath();
                 RecalculatePath();
