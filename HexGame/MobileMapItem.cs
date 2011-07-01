@@ -11,7 +11,7 @@
 
         private void _moveAlongPath()
         {
-            HexQuoordinates = _path.Pop();
+            //HexQuoordinates = _path.Pop();
         }
 
         private void _getNewPath()
