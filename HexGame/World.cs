@@ -13,10 +13,8 @@ namespace HexGame
 
         List<MapItem> _mapItems;
 
-        // keeps track of what the player has selected
-        public bool HexIsSelected;
-        IntVector2 _selectedHex;
-        public IntVector2 SelectedHex 
+        private IntVector2? _selectedHex = null;
+        public IntVector2? SelectedHex 
         {
             get
             {
@@ -26,7 +24,6 @@ namespace HexGame
             {
                 if (IsValidHexQuoord(value))
                 {
-                    HexIsSelected = true;
                     _selectedHex = value;
                 }
             }
@@ -64,6 +61,14 @@ namespace HexGame
                 _map[quoord.X, quoord.Y] = new Hex(quoord);
 
             return _map[quoord.X, quoord.Y];
+        }
+
+        public bool IsValidHexQuoord(IntVector2? hexQuoord)
+        {
+            if (hexQuoord == null)
+                return false;
+
+            return IsValidHexQuoord(hexQuoord.Value);
         }
 
         public bool IsValidHexQuoord(IntVector2 hexQuoord) 
@@ -263,6 +268,21 @@ namespace HexGame
             }
 
             return validatedBoneHexes;
+        }
+
+        public void MoveCommand(IntVector2? selectedHex, IntVector2 clickHex)
+        {
+            Unit selectedUnit = _getUnitAt((IntVector2)selectedHex);
+
+            if (selectedUnit != null)
+            {
+                selectedUnit.DestinationTile = GetHexAt(clickHex);
+            }
+        }
+
+        private Unit _getUnitAt(IntVector2 selectedHex)
+        {
+            return _mapItems.OfType<Unit>().First(x => x.HexTile == GetHexAt(selectedHex));
         }
     }
 }

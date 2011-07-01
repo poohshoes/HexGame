@@ -39,7 +39,10 @@ namespace HexGame
             _world.AddMapItem(new Warehouse(_world.GetHexAt(new IntVector2(5, 4)), _world));
             _world.AddMapItem(new Unit(UnitType.Infantry, new IntVector2(6, 6), _world));
 
-            _drawingMaster = new ViewMaster(this, _world, _mouseInputHandler);
+            _drawingMaster = new ViewMaster(this, _world);
+
+            _mouseInputHandler.LeftMouseClick += TrySelect;
+            _mouseInputHandler.RightMouseClick += TryMove;
 
             base.Initialize();
         }
@@ -89,6 +92,22 @@ namespace HexGame
             _drawingMaster.DrawWorld();
 
             base.Draw(gameTime);
+        }
+
+
+        public void TrySelect(IntVector2 mousePosition)
+        {
+            IntVector2 clickHex;
+            if (_drawingMaster.GetHexFromScreenPosition(mousePosition, out clickHex))
+                _world.SelectedHex = clickHex;
+        }
+
+        public void TryMove(IntVector2 mousePosition)
+        {
+            IntVector2 clickHex;
+            if (_drawingMaster.GetHexFromScreenPosition(mousePosition, out clickHex)
+                && _world.SelectedHex != null)
+                _world.MoveCommand(_world.SelectedHex, clickHex);
         }
     }
 }

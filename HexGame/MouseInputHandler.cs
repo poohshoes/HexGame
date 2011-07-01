@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 
 namespace HexGame
@@ -12,15 +8,16 @@ namespace HexGame
     class MouseInputHandler : GameComponent
     {
         public MouseLocation LeftMouseClick;
+        public MouseLocation RightMouseClick;
 
-        MouseState _PreviousMouseState;
+        MouseState _previousMouseState;
 
         public MouseInputHandler(Game game)
             : base(game)
         {
             game.Components.Add(this);
 
-            _PreviousMouseState = Mouse.GetState();
+            _previousMouseState = Mouse.GetState();
         }
 
         public override void Update(GameTime gameTime)
@@ -28,10 +25,13 @@ namespace HexGame
             MouseState mouseState = Mouse.GetState();
 
             if (mouseState.LeftButton == ButtonState.Released
-                && _PreviousMouseState.LeftButton == ButtonState.Pressed)
+                && _previousMouseState.LeftButton == ButtonState.Pressed)
                 LeftMouseClick(new IntVector2(mouseState.X, mouseState.Y));
+            if (mouseState.RightButton == ButtonState.Released
+                && _previousMouseState.RightButton == ButtonState.Pressed)
+                RightMouseClick(new IntVector2(mouseState.X, mouseState.Y));
 
-            _PreviousMouseState = mouseState;
+            _previousMouseState = mouseState;
 
             base.Update(gameTime);
         }
