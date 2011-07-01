@@ -24,7 +24,7 @@ namespace HexGame
             {
                 _timeInSecondsForNextFoodGeneration += _secondsToGenerateFood;
                 // if there is room add a food
-                _hex.AddResource(new Resource(ResourceTypes.Food));
+                base.hex.AddResource(new Resource(ResourceTypes.Food));
             }
         }
     }

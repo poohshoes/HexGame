@@ -46,6 +46,11 @@ namespace HexGame
             if (_path.Count > 1)
                 pathLength -= _path.Last().MoveCost / 2;
             return pathLength;
-        } 
+        }
+
+        internal IntVector2 Pop()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
