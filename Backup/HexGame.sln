@@ -1,9 +1,7 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual C# Express 2010
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual C# Express 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexGame", "HexGame\HexGame.csproj", "{B8506D43-DA81-4D02-B8FC-440E35993C48}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexGameContent", "HexGame\Content\HexGameContent.contentproj", "{FF914836-3AA9-4E27-B97B-68FDA76B630D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

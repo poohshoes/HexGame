@@ -22,3 +22,6 @@ C:\Users\Ian\github\HexGame\HexGame\bin\x86\Debug\HexGame.exe
 C:\Users\Ian\github\HexGame\HexGame\bin\x86\Debug\HexGame.pdb
 C:\Users\Ian\github\HexGame\HexGame\bin\x86\Debug\Content\warehouse.xnb
 C:\Documents and Settings\ian\github\HexGame\HexGame\bin\x86\Debug\Content\warehouse.xnb
+C:\Users\Ryan\Desktop\HexGame\HexGame\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Ryan\Desktop\HexGame\HexGame\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Ryan\Desktop\HexGame\HexGame\obj\x86\Debug\HexGame.exe
