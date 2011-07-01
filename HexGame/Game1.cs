@@ -45,7 +45,10 @@ namespace HexGame
             var resourceDestinationTile = _world.GetHexAt(new IntVector2(9, 9));
             _world.AddMapItem(new Shipper(shipperHex, resourceSourceTile, resourceDestinationTile, ResourceType.Food, _world));
 
-            _drawingMaster = new ViewMaster(this, _world, _mouseInputHandler);
+            _drawingMaster = new ViewMaster(this, _world);
+
+            _mouseInputHandler.LeftMouseClick += TrySelect;
+            _mouseInputHandler.RightMouseClick += TryMove;
 
             base.Initialize();
         }
@@ -95,6 +98,22 @@ namespace HexGame
             _drawingMaster.DrawWorld();
 
             base.Draw(gameTime);
+        }
+
+
+        public void TrySelect(IntVector2 mousePosition)
+        {
+            IntVector2 clickHex;
+            if (_drawingMaster.GetHexFromScreenPosition(mousePosition, out clickHex))
+                _world.SelectedHex = clickHex;
+        }
+
+        public void TryMove(IntVector2 mousePosition)
+        {
+            IntVector2 clickHex;
+            if (_drawingMaster.GetHexFromScreenPosition(mousePosition, out clickHex)
+                && _world.SelectedHex != null)
+                _world.MoveCommand(_world.SelectedHex, clickHex);
         }
     }
 }

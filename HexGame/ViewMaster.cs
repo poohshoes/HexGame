@@ -31,7 +31,7 @@ namespace HexGame
 
         SpriteBatch _spriteBatch;
 
-        public ViewMaster(Game game, World world, MouseInputHandler mouseInputHandler) 
+        public ViewMaster(Game game, World world) 
         {
             _world = world;
 
@@ -48,7 +48,6 @@ namespace HexGame
             _hexTextureDims.X = _hexTexture.Width;
             _hexTextureDims.Y = _hexTexture.Height;
 
-            mouseInputHandler.LeftMouseClick += LeftMouseClickBehaviour;
         }
 
         public void DrawWorld() 
@@ -64,20 +63,13 @@ namespace HexGame
             _spriteBatch.End();
         }
 
-        public void LeftMouseClickBehaviour(IntVector2 mousePosition) 
-        {
-            IntVector2 selectedHex;
-            if (_getHexFromScreenPosition(mousePosition, out selectedHex))
-              _world.SelectedHex = selectedHex;
-        }
-
         /// <summary>
         /// Gets the Hex that us under the screen position supplied.
         /// </summary>
         /// <param name="positionOnScreen"></param>
         /// <param name="hex"></param>
         /// <returns>True if hex was found, false otherwise.</returns>
-        bool _getHexFromScreenPosition(IntVector2 positionOnScreen, out IntVector2 hex)
+        public bool GetHexFromScreenPosition(IntVector2 positionOnScreen, out IntVector2 hex)
         {
             // alows us to return early if no hex can be found.
             hex = IntVector2.Zero;
@@ -157,11 +149,11 @@ namespace HexGame
 
         void _drawHexSelection() 
         {
-            if (_world.HexIsSelected) 
+            if (_world.SelectedHex != null) 
             {
                 _spriteBatch.Draw(
                         _hexHighlightTexture,
-                        _getScreenPositionOfHex(_world.SelectedHex).ToVector2(),
+                        _getScreenPositionOfHex(_world.SelectedHex.Value).ToVector2(),
                         Color.White
                         );
             }
