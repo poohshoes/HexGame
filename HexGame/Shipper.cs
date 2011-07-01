@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-
 namespace HexGame
 {
-    class Shipper : MapItem
+    class Shipper : MobileMapItem
     {
         private readonly ResourceType _shippedResourceType;
         private readonly Hex _resourceSourceTile;
@@ -14,12 +13,10 @@ namespace HexGame
         {
             get { return base.HexTile == _resourceDestinationTile; }
         }
-
         private bool IsAtSourceTile
         {
             get { return base.HexTile == _resourceSourceTile; }
         }
-
         private Resource _carriedResource;
         private Path _path;
         

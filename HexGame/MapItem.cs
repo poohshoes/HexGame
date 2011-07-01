@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
-
-namespace HexGame
+﻿namespace HexGame
 {
     abstract class MapItem
     {
         public World World { get; private set; }
-
         public IntVector2 HexQuoordinates { get; protected set; }
 
         public Hex HexTile
@@ -17,9 +10,10 @@ namespace HexGame
             get { return World.GetHexAt(HexQuoordinates); }
         }
 
-        public MapItem(IntVector2 hexQuoords, World world) 
+        protected MapItem(IntVector2 hexQuoords, World world) 
         {
             HexQuoordinates = hexQuoords;
+            World = world;
         }
 
         virtual public void Update(double totalGameSeconds) 

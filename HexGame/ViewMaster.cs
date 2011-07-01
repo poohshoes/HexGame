@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using System.Diagnostics;
@@ -56,6 +55,7 @@ namespace HexGame
             _drawHexSelection();
             _drawResources();
             _drawBuildings();
+            _drawUnits();
 
             _spriteBatch.End();
         }
@@ -165,11 +165,23 @@ namespace HexGame
 
         void _drawBuildings() 
         {
-            foreach (var b in _world.MapItems.OfType<Building>()) 
+            foreach (Building b in _world.MapItems.Where(x => x is Building)) 
             {
                 _spriteBatch.Draw(
                         _getBuildingTexture(b.BuildingType),
                         _getScreenPositionOfBuilding(b.HexQuoordinates).ToVector2(),
+                        Color.White
+                        );
+            }
+        }
+
+        void _drawUnits()
+        {
+            foreach (Unit u in _world.MapItems.Where(x => x is Unit))
+            {
+                _spriteBatch.Draw(
+                        _warehouseTexture,
+                        _getScreenPositionOfBuilding(u.HexQuoordinates).ToVector2(),
                         Color.White
                         );
             }

@@ -1,0 +1,61 @@
+﻿namespace HexGame
+{
+    class Shipper : MobileMapItem
+    {
+        Resource _resource;
+
+<<<<<<< HEAD
+=======
+        Path _path { get; set; }
+
+        protected World _world;
+
+>>>>>>> 7e633d9a0c99c4b9c2c3eb794e58eec57f01dbd7
+        public Shipper(IntVector2 startingPoisition, World world)
+            : base(startingPoisition, world)
+        {
+        }
+
+        public override void Update(double totalGameSeconds)
+        {
+            base.Update(totalGameSeconds);
+        }
+
+<<<<<<< HEAD
+        private void _haveArrivedAtDestination()
+=======
+        private void MoveAlongPath()
+        {
+            hexQuoordinates = _path.Pop();
+        }
+
+        private void HaveArrivedAtDestination() 
+>>>>>>> 7e633d9a0c99c4b9c2c3eb794e58eec57f01dbd7
+        {
+            if (_resource == null)
+                DropResource();
+            else
+                GetResource();
+        }
+
+<<<<<<< HEAD
+        private void _dropResource()
+=======
+        private void GetNewPath()
+        {
+
+        }
+
+        private void DropResource()
+>>>>>>> 7e633d9a0c99c4b9c2c3eb794e58eec57f01dbd7
+        {
+            _world.addResource(this.HexQuoordinates, _resource);
+            _resource = null;
+        }
+
+        private void GetResource()
+        {
+            
+        }
+    }
+}
