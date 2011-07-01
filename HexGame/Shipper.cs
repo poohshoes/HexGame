@@ -4,11 +4,41 @@ namespace HexGame
 {
     class Shipper : MobileMapItem
     {
-        private readonly ResourceType _shippedResourceType;
-        private readonly Hex _resourceSourceTile;
-        private readonly Hex _resourceDestinationTile;
-
         private Resource _carriedResource;
+
+        private ResourceType _shippedResourceType;
+        
+        private Hex _resourceSourceTile;
+        public Hex ResourceSourceTile
+        {
+            get { return _resourceSourceTile; }
+            set
+            {
+                if (_resourceSourceTile == value)
+                    return;
+
+                if (base.DestinationTile == _resourceSourceTile)
+                    base.DestinationTile = value;
+
+                _resourceSourceTile = value;
+            }
+        }
+
+        private Hex _resourceDestinationTile;
+        public Hex ResourceDestinationTile
+        {
+            get { return _resourceDestinationTile; }
+            set
+            {
+                if (_resourceDestinationTile == value)
+                    return;
+
+                if (base.DestinationTile == _resourceDestinationTile)
+                    base.DestinationTile = value;
+
+                _resourceDestinationTile = value;
+            }
+        }
 
         private bool IsAtResourceDestinationTile
         {
@@ -19,6 +49,7 @@ namespace HexGame
         {
             get { return base.HexTile == _resourceSourceTile; }
         }
+
 
         public Shipper(Hex startingHex, Hex resourceSourceTile, Hex resourceDestinationTile, ResourceType shippedResourceType, World world)
             : base(startingHex.MapQuoordinate, world)
@@ -47,7 +78,8 @@ namespace HexGame
                     base.IsMoveEnabled = false;
                 }
             }
-            else if (IsAtResourceDestinationTile)
+            
+            if (IsAtResourceDestinationTile)
             {
                 var droppedResource = TryDropResource();
                 if (droppedResource)
@@ -61,7 +93,6 @@ namespace HexGame
                 }
             }
         }
-
 
         private bool TryPickUpResource()
         {

@@ -45,3 +45,5 @@ _ReSharper*/
 
 # Office Temp Files
 ~$*
+
+HexGame/HexGame.csproj.Debug.cachefile
