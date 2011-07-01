@@ -68,7 +68,7 @@ namespace HexGame
             if (_resources.Count >= _maxResources)
                 return false;
 
-            _resources.Add((Resource)toAdd);
+            _resources.Add(toAdd);
             return true;
         }
 
@@ -81,7 +81,7 @@ namespace HexGame
         {
             Debug.Assert(toRemove != null, "Can't remove a resource that is null.");
 
-            return _resources.Remove((Resource)toRemove);
+            return _resources.Remove(toRemove);
         }
     }
 }

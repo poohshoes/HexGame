@@ -39,12 +39,13 @@ namespace HexGame
             : base(hexQuoords, world)
         {
             _pathFinding = new PathFinding(world);
+            IsMoveEnabled = true;
         }
 
         private void RecalculatePath()
         {
             var positionPath = _pathFinding.AStar(base.HexTile.MapQuoordinate, DestinationTile.MapQuoordinate);
-            var hexPath = positionPath.Select(v => World.GetHexAt(v));
+            var hexPath = positionPath.Select(v => World.GetHexAt(v)).Reverse();
             Stack<Hex> initialPath = new Stack<Hex>(hexPath);
             _path = new Path(initialPath);
         }
@@ -61,13 +62,17 @@ namespace HexGame
                 OnArrivedAtDestination();
         }
 
+        private readonly double _moveInterval = 0.25;
+        private double _lastMoveTime;
+
         public override void Update(double totalGameSeconds)
         {
             base.Update(totalGameSeconds);
-            if (IsMoveEnabled)
+            if (IsMoveEnabled && DestinationTile != null && (totalGameSeconds - _lastMoveTime) >= _moveInterval)
             {
                 MoveAlongPath();
                 RecalculatePath();
+                _lastMoveTime = totalGameSeconds;
             }
         }
 

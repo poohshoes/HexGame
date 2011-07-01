@@ -20,50 +20,73 @@ namespace HexGame
             get { return base.HexTile == _resourceSourceTile; }
         }
 
-        public Shipper(IntVector2 startingPoisition, Hex resourceSourceTile, Hex resourceDestinationTile, ResourceType shippedResourceType, World world)
-            : base(startingPoisition, world)
+        public Shipper(Hex startingHex, Hex resourceSourceTile, Hex resourceDestinationTile, ResourceType shippedResourceType, World world)
+            : base(startingHex.MapQuoordinate, world)
         {
             _resourceSourceTile = resourceSourceTile;
             _resourceDestinationTile = resourceDestinationTile;
             _shippedResourceType = shippedResourceType;
+
+            base.DestinationTile = _resourceSourceTile;
         }
 
-        protected override void OnArrivedAtDestination()
+        public override void Update(double totalGameSeconds)
         {
-            base.OnArrivedAtDestination();
+            base.Update(totalGameSeconds);
 
             if (IsAtResourceSourceTile)
             {
-                PickUpResource();
-                base.DestinationTile = _resourceDestinationTile;
+                var pickedUpResource = TryPickUpResource();
+                if (pickedUpResource)
+                {
+                    base.DestinationTile = _resourceDestinationTile;
+                    base.IsMoveEnabled = true;
+                }
+                else
+                {
+                    base.IsMoveEnabled = false;
+                }
             }
             else if (IsAtResourceDestinationTile)
             {
-                DropResource();
-                base.DestinationTile = _resourceSourceTile;
+                var droppedResource = TryDropResource();
+                if (droppedResource)
+                {
+                    base.DestinationTile = _resourceSourceTile;
+                    base.IsMoveEnabled = true;
+                }
+                else
+                {
+                    base.IsMoveEnabled = false;
+                }
             }
         }
 
-        private void PickUpResource()
+
+        private bool TryPickUpResource()
         {
             var tileResource = base.HexTile.Resources.FirstOrDefault(r => r.ResourceType == _shippedResourceType);
             if (tileResource == null)
-                return;
+                return false;
 
-            bool pickedUpResource = _resourceDestinationTile.RemoveResource(tileResource);
+            bool pickedUpResource = base.HexTile.RemoveResource(tileResource);
             if (!pickedUpResource)
-                return;
+                return false;
 
             _carriedResource = tileResource;
+            return true;
         }
 
-        private void DropResource()
+        private bool TryDropResource()
         {
             if (_carriedResource == null)
-                return;
+                return true;
 
-            base.HexTile.AddResource(_carriedResource);
-            _carriedResource = null;
+            var droppedResource = base.HexTile.AddResource(_carriedResource);
+            if (droppedResource)
+                _carriedResource = null;
+
+            return droppedResource;
         }
     }
 }

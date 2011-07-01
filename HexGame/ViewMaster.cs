@@ -19,6 +19,7 @@ namespace HexGame
         Texture2D _farmTexture;
         Texture2D _warehouseTexture;
         Texture2D _infantryTexture;
+        Texture2D _shipperTexture;
 
         Texture2D _hexTexture;
         readonly IntVector2 _hexTextureDims;
@@ -41,6 +42,7 @@ namespace HexGame
             _farmTexture = game.Content.Load<Texture2D>("farm");
             _warehouseTexture = game.Content.Load<Texture2D>("warehouse");
             _infantryTexture = game.Content.Load<Texture2D>("infantry");
+            _shipperTexture = game.Content.Load<Texture2D>("shipper");
 
             _hexTexture = game.Content.Load<Texture2D>("hexGrass");
             _hexTextureDims.X = _hexTexture.Width;
@@ -187,6 +189,9 @@ namespace HexGame
                         Color.White
                         );
             }
+
+            foreach (var shipper in _world.MapItems.OfType<Shipper>())
+                _spriteBatch.Draw(_shipperTexture, _getScreenPositionOfMapItem(shipper.HexQuoordinates).ToVector2(), Color.White);
         }
 
         void _drawMapTiles() 

@@ -16,6 +16,7 @@ namespace HexGame
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferHeight = 768;
             Content.RootDirectory = "Content";
         }
 
@@ -38,6 +39,11 @@ namespace HexGame
             _world.AddMapItem(new Farm(_world.GetHexAt(new IntVector2(5, 5)), _world));
             _world.AddMapItem(new Warehouse(_world.GetHexAt(new IntVector2(5, 4)), _world));
             _world.AddMapItem(new Unit(UnitType.Infantry, new IntVector2(6, 6), _world));
+            
+            var shipperHex = _world.GetHexAt(new IntVector2(0, 0));
+            var resourceSourceTile = _world.GetHexAt(new IntVector2(4,4));
+            var resourceDestinationTile = _world.GetHexAt(new IntVector2(9, 9));
+            _world.AddMapItem(new Shipper(shipperHex, resourceSourceTile, resourceDestinationTile, ResourceType.Food, _world));
 
             _drawingMaster = new ViewMaster(this, _world, _mouseInputHandler);
 
@@ -73,7 +79,7 @@ namespace HexGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            _world.Update(gameTime.TotalGameTime.Seconds);
+            _world.Update(gameTime.TotalGameTime.TotalSeconds);
 
             base.Update(gameTime);
         }
