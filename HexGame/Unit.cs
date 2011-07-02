@@ -19,11 +19,11 @@ namespace HexGame
             get { return HitPoints <= 0; }
         }
 
-        public Hex DestinationTile
+        /*public Hex DestinationTile
         {
             get { throw new NotImplementedException(); }//return base.DestinationTile;  }
             set { throw new NotImplementedException(); }// base.DestinationTile = value;  }
-        }
+        }*/
 
         public Unit(UnitType unittype, IntVector2 hexQuoords, World world) 
             : base(hexQuoords, world)
@@ -45,11 +45,6 @@ namespace HexGame
         private void ChangeHitPoints(int hitPointChange)
         {
             HitPoints += hitPointChange;
-            if (isDead)
-            {
-                throw new NotImplementedException();
-                //base.IsMoveEnabled = false;
-            }
         }
     }
 }
