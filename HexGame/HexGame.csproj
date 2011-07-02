@@ -116,10 +116,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Building.cs" />
+    <Compile Include="DropResourcesTask.cs" />
     <Compile Include="Image.cs" />
     <Compile Include="MobileMapItem.cs" />
+    <Compile Include="MoveResourcesTask.cs" />
+    <Compile Include="MoveToHexTask.cs" />
+    <Compile Include="PickUpResourcesTask.cs" />
     <Compile Include="ResourceHex.cs" />
-    <Compile Include="ShipperTask.cs" />
+    <Compile Include="Task.cs" />
     <Compile Include="Farm.cs" />
     <Compile Include="Hex.cs" />
     <Compile Include="IntVector2.cs" />
@@ -127,7 +131,7 @@
     <Compile Include="PathFinding.cs" />
     <Compile Include="Resource.cs" />
     <Compile Include="ResourceDemandManager.cs" />
-    <Compile Include="Shipper.cs" />
+    <Compile Include="Worker.cs" />
     <Compile Include="Unit.cs" />
     <Compile Include="ViewMaster.cs" />
     <Compile Include="MapItem.cs" />

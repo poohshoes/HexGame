@@ -190,7 +190,7 @@ namespace HexGame
                         );
             }
 
-            foreach (var shipper in _world.MapItems.OfType<Shipper>())
+            foreach (var shipper in _world.MapItems.OfType<Worker>())
                 _spriteBatch.Draw(_shipperTexture.Texture, _getScreenPositionOfMapItem(shipper, _shipperTexture).ToVector2(), Color.White);
         }
 

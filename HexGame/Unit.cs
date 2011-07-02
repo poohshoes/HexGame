@@ -21,8 +21,8 @@ namespace HexGame
 
         public Hex DestinationTile
         {
-            get { return base.DestinationTile;  }
-            set { base.DestinationTile = value;  }
+            get { throw new NotImplementedException(); }//return base.DestinationTile;  }
+            set { throw new NotImplementedException(); }// base.DestinationTile = value;  }
         }
 
         public Unit(UnitType unittype, IntVector2 hexQuoords, World world) 
@@ -46,7 +46,10 @@ namespace HexGame
         {
             HitPoints += hitPointChange;
             if (isDead)
-                base.IsMoveEnabled = false;
+            {
+                throw new NotImplementedException();
+                //base.IsMoveEnabled = false;
+            }
         }
     }
 }

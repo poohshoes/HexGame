@@ -304,7 +304,7 @@ namespace HexGame
 
             if (selectedUnit != null)
             {
-                selectedUnit.DestinationTile = GetHexAt(clickHex);
+                //selectedUnit.DestinationTile = GetHexAt(clickHex);
             }
         }
 

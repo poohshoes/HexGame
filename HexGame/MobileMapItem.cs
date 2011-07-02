@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace HexGame
 {
@@ -8,78 +7,18 @@ namespace HexGame
     /// </summary>
     class MobileMapItem : MapItem
     {
-        private readonly PathFinding _pathFinding;
-        private Path _path;
-
-        private bool IsAtDestinationTile
-        {
-            get { return base.HexTile == DestinationTile; }
-        }
-
-        private Hex _destinationTile;
-        protected Hex DestinationTile
-        {
-            get { return _destinationTile; }
-            set
-            {
-                if (_destinationTile == value)
-                    return;
-
-                _destinationTile = value;
-                RecalculatePath();
-            }
-        }
-
-        /// <summary>
-        /// Determines if the unit will automatically move from the source to the destination.
-        /// </summary>
-        protected bool IsMoveEnabled { get; set; }
+        public double MoveIntervalInSeconds { get; private set; }
 
         public MobileMapItem(IntVector2 hexQuoords, World world)
             : base(hexQuoords, world)
         {
-            _pathFinding = new PathFinding(world);
-            IsMoveEnabled = true;
             MoveIntervalInSeconds = 0.25;
         }
 
-        private void RecalculatePath()
+        public new IntVector2 HexQuoordinates
         {
-            var positionPath = _pathFinding.AStar(base.HexTile.MapQuoordinate, DestinationTile.MapQuoordinate);
-            var hexPath = positionPath.Select(v => World.GetHexAt(v)).Reverse();
-            Stack<Hex> initialPath = new Stack<Hex>(hexPath);
-            _path = new Path(initialPath);
-        }
-
-        private void MoveAlongPath()
-        {
-            var nextTile = _path.GetNextMapTile();
-            if (nextTile == null)
-                return;
-
-            base.HexQuoordinates = nextTile.MapQuoordinate;
-            
-            if (base.HexTile == DestinationTile)
-                OnArrivedAtDestination();
-        }
-
-        protected double MoveIntervalInSeconds { get; set; }
-
-        private double _lastMoveTime;
-
-        public override void Update(double totalGameSeconds)
-        {
-            base.Update(totalGameSeconds);
-            if (IsMoveEnabled && DestinationTile != null && (totalGameSeconds - _lastMoveTime) >= MoveIntervalInSeconds)
-            {
-                MoveAlongPath();
-                RecalculatePath();
-                _lastMoveTime = totalGameSeconds;
-            }
-        }
-
-        protected virtual void OnArrivedAtDestination()
-        {
+            get { return base.HexQuoordinates; }
+            set { base.HexQuoordinates = value; }
         }
     }
 }

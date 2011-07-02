@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
 
 namespace HexGame
 {
@@ -7,6 +8,9 @@ namespace HexGame
         public World World { get; private set; }
 
         public IntVector2 HexQuoordinates { get; protected set; }
+
+        public Queue<Task> Tasks { get; private set; }
+        private Task _currentTask;
 
         /// <summary>
         /// The tile the map item is currently on
@@ -20,11 +24,24 @@ namespace HexGame
         {
             HexQuoordinates = hexQuoords;
             World = world;
+
+            Tasks = new Queue<Task>();
         }
 
         virtual public void Update(double totalGameSeconds) 
         {
-        
+            if (_currentTask != null)
+            {
+                var completedTask = _currentTask.PerformTask(totalGameSeconds);
+                if (completedTask)
+                    _currentTask = null;
+            }
+            else
+            {
+                if (Tasks.Count == 0)
+                    return;
+                _currentTask = Tasks.Dequeue();
+            }
         }
     }
 }
