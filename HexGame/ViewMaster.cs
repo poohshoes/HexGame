@@ -14,13 +14,15 @@ namespace HexGame
     {
         World _world;
 
+        Image _farmTexture;
+        Image _forestTexture;
         Image _foodTexture;
         Image _hexHighlightTexture;
-        Image _farmTexture;
-        Image _warehouseTexture;
-        Image _infantryTexture;
-        Image _shipperTexture;
         Image _hexTexture;
+        Image _infantryTexture;
+        Image _lumberTexture;
+        Image _shipperTexture;
+        Image _warehouseTexture;
 
         readonly IntVector2 _hexTextureDims;
         const int _hexXOverlapPixels = 20;
@@ -36,14 +38,16 @@ namespace HexGame
             _spriteBatch = new SpriteBatch(game.GraphicsDevice);
 
             _foodTexture = new Image(game.Content.Load<Texture2D>("resourceFood"));
+            _lumberTexture = new Image(game.Content.Load<Texture2D>("resourceLumber"));
             _hexHighlightTexture = new Image(game.Content.Load<Texture2D>("hexHighlight"));
 
             _farmTexture = new Image(game.Content.Load<Texture2D>("farm"), new IntVector2(25, 0));
             _warehouseTexture = new Image(game.Content.Load<Texture2D>("warehouse"), new IntVector2(20, 5));
 
             _infantryTexture = new Image(game.Content.Load<Texture2D>("infantry"), new IntVector2(15, -10));
-            _shipperTexture = new Image(game.Content.Load<Texture2D>("shipper"), new IntVector2(0, -5));
 
+            _shipperTexture = new Image(game.Content.Load<Texture2D>("shipper"), new IntVector2(0, -5));
+            _forestTexture = new Image(game.Content.Load<Texture2D>("forest"));
             _hexTexture = new Image(game.Content.Load<Texture2D>("hexGrass"));
             _hexTextureDims.X = _hexTexture.Texture.Width;
             _hexTextureDims.Y = _hexTexture.Texture.Height;
@@ -55,6 +59,7 @@ namespace HexGame
             _spriteBatch.Begin();
 
             _drawMapTiles();
+            _drawResourseTiles();
             _drawHexSelection();
             _drawResources();
             _drawBuildings();
@@ -138,8 +143,9 @@ namespace HexGame
 
                     drawLocation += _getScreenPositionOfHex(h.MapQuoordinate).ToVector2();
 
+                    Image resourceImage = _getResourceImage(h.Resources[i].ResourceType);
                     _spriteBatch.Draw(
-                        _foodTexture.Texture,
+                        resourceImage.Texture,
                         drawLocation,
                         Color.White
                         );
@@ -201,6 +207,41 @@ namespace HexGame
                         );
                 }
             }
+        }
+
+        void _drawResourseTiles()
+        {
+            foreach (var resourceHex in _world.MapItems.OfType<ResourceHex>())
+            {
+                Image resourceHexImage = _getResourceHexImage(resourceHex.Type);
+                _spriteBatch.Draw(
+                        resourceHexImage.Texture,
+                        _getScreenPositionOfMapItem(resourceHex, resourceHexImage).ToVector2(),
+                        Color.White
+                        );
+            }
+        }
+
+        private Image _getResourceImage(ResourceType type)
+        {
+            switch (type)
+            {
+                case ResourceType.Lumber:
+                    return _lumberTexture;
+                case ResourceType.Food:
+                    return _foodTexture;
+            }
+            throw new Exception("Resource texture not supplied.");
+        }
+
+        private Image _getResourceHexImage(ResourceHexType type)
+        {
+            switch (type)
+            {
+                case ResourceHexType.Forest:
+                    return _forestTexture;
+            }
+            throw new Exception("ResourceHex texture not supplied.");
         }
 
         Image _getBuildingImage(BuildingType building)

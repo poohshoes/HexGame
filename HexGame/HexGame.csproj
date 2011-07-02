@@ -118,6 +118,7 @@
     <Compile Include="Building.cs" />
     <Compile Include="Image.cs" />
     <Compile Include="MobileMapItem.cs" />
+    <Compile Include="ResourceHex.cs" />
     <Compile Include="ShipperTask.cs" />
     <Compile Include="Farm.cs" />
     <Compile Include="Hex.cs" />

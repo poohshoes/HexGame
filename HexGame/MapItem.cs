@@ -1,4 +1,6 @@
-﻿namespace HexGame
+﻿using System;
+
+namespace HexGame
 {
     abstract class MapItem
     {

@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace HexGame
+﻿namespace HexGame
 {
-    enum ResourceType { Food };
+    enum ResourceType
+    {
+        Food,
+        Lumber
+    };
 
     class Resource
     {
