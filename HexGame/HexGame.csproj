@@ -117,6 +117,7 @@
   <ItemGroup>
     <Compile Include="Building.cs" />
     <Compile Include="DropResourcesTask.cs" />
+    <Compile Include="Image.cs" />
     <Compile Include="MobileMapItem.cs" />
     <Compile Include="MoveResourcesTask.cs" />
     <Compile Include="MoveToHexTask.cs" />

@@ -12,6 +12,7 @@ namespace HexGame
         public MobileMapItem(IntVector2 hexQuoords, World world)
             : base(hexQuoords, world)
         {
+            MoveIntervalInSeconds = 0.25;
         }
 
         public new IntVector2 HexQuoordinates

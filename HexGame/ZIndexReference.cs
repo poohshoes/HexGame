@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace HexGame
+﻿namespace HexGame
 { 
     /// <summary>
     /// The order of this enum is the order that Items will draw in the game.
@@ -21,6 +16,6 @@ namespace HexGame
         public static float getZIndex(drawnItemOrders drawnItem)
         {
             return ((int)drawnItem) / 100f;
-            }
+        }
     }
 }

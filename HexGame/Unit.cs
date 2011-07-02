@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace HexGame
 {
@@ -11,16 +12,44 @@ namespace HexGame
     {
         public UnitType UnitType { get; private set; }
 
-        //public Hex DestinationTile
-        //{
-        //    get { return base.DestinationTile;  }
-        //    set { base.DestinationTile = value;  }
-        //}
+        public int HitPoints { get; private set; }
+
+        public Boolean isDead
+        {
+            get { return HitPoints <= 0; }
+        }
+
+        public Hex DestinationTile
+        {
+            get { throw new NotImplementedException(); }//return base.DestinationTile;  }
+            set { throw new NotImplementedException(); }// base.DestinationTile = value;  }
+        }
 
         public Unit(UnitType unittype, IntVector2 hexQuoords, World world) 
             : base(hexQuoords, world)
         {
             this.UnitType = unittype;
+            HitPoints = 4;
+        }
+
+        public override void Update(double totalGameSeconds)
+        {
+            base.Update(totalGameSeconds);
+
+            Unit neighourUnit = base.World.firstNeighbouringUnit(base.HexTile.MapQuoordinate);
+
+            if (neighourUnit != null)
+                neighourUnit.ChangeHitPoints(-1);
+        }
+
+        private void ChangeHitPoints(int hitPointChange)
+        {
+            HitPoints += hitPointChange;
+            if (isDead)
+            {
+                throw new NotImplementedException();
+                //base.IsMoveEnabled = false;
+            }
         }
     }
 }

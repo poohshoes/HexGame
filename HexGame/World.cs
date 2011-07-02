@@ -53,6 +53,8 @@ namespace HexGame
             {
                 m.Update(totalGameSeconds);
             }
+
+            _mapItems.RemoveAll(x => x is Unit && ((Unit) x).isDead);
         }
 
         public Hex GetHexAt(IntVector2 quoord) 
@@ -203,6 +205,32 @@ namespace HexGame
             return neighborHexes;
         }
 
+        public List<Unit> neighbourUnits(IntVector2 location)
+        {
+            List<Unit> units = new List<Unit>();
+
+            foreach (IntVector2 neighbourTile in neighborHexes(location))
+            {
+                Unit unit = _getUnitAt(neighbourTile);
+                if (unit != null)
+                    units.Add(unit);
+            }
+
+            return units;
+        }
+
+        public Unit firstNeighbouringUnit(IntVector2 location)
+        {
+            foreach (IntVector2 neighbourTile in neighborHexes(location))
+            {
+                Unit unit = _getUnitAt(neighbourTile);
+                if (unit != null)
+                    return unit;
+            }
+
+            return null;
+        }
+
         /// <summary>
         /// The bone shape is like this:
         ///  _   _
@@ -282,7 +310,7 @@ namespace HexGame
 
         private Unit _getUnitAt(IntVector2 selectedHex)
         {
-            return _mapItems.OfType<Unit>().First(x => x.HexTile == GetHexAt(selectedHex));
+            return _mapItems.OfType<Unit>().FirstOrDefault(x => x.HexTile == GetHexAt(selectedHex));
         }
     }
 }
