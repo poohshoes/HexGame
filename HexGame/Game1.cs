@@ -41,9 +41,13 @@ namespace HexGame
             _world.AddMapItem(new Unit(UnitType.Infantry, new IntVector2(6, 6), _world));
             
             var shipperHex = _world.GetHexAt(new IntVector2(0, 0));
+            var worker = new Worker(shipperHex, _world);
+
             var resourceSourceTile = _world.GetHexAt(new IntVector2(4,4));
             var resourceDestinationTile = _world.GetHexAt(new IntVector2(9, 9));
-            _world.AddMapItem(new Shipper(shipperHex, resourceSourceTile, resourceDestinationTile, ResourceType.Food, _world));
+            var moveResourcesTask = new MoveResourcesTask(worker,resourceSourceTile, resourceDestinationTile, ResourceType.Food);
+            worker.Tasks.Enqueue(moveResourcesTask);
+            _world.AddMapItem(worker);
 
             _drawingMaster = new ViewMaster(this, _world);
 

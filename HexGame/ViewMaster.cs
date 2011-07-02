@@ -182,7 +182,7 @@ namespace HexGame
                         );
             }
 
-            foreach (var shipper in _world.MapItems.OfType<Shipper>())
+            foreach (var shipper in _world.MapItems.OfType<Worker>())
                 _spriteBatch.Draw(_shipperTexture, _getScreenPositionOfMapItem(shipper.HexQuoordinates).ToVector2(), Color.White);
         }
 

@@ -11,11 +11,11 @@ namespace HexGame
     {
         public UnitType UnitType { get; private set; }
 
-        public Hex DestinationTile
-        {
-            get { return base.DestinationTile;  }
-            set { base.DestinationTile = value;  }
-        }
+        //public Hex DestinationTile
+        //{
+        //    get { return base.DestinationTile;  }
+        //    set { base.DestinationTile = value;  }
+        //}
 
         public Unit(UnitType unittype, IntVector2 hexQuoords, World world) 
             : base(hexQuoords, world)
